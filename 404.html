@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Not in the catalogue — The Ninth Catalogue</title>
 <meta name="robots" content="noindex">
+<script>
+// The forwarding link's longer forms: /dar-al-hikma/<piece>/ goes to that piece at the collection's own address.
+(function(){
+  var p = location.pathname, base = '/dar-al-hikma/';
+  if (p.indexOf(base) === 0) location.replace('https://dar-al-hikma.github.io/' + p.slice(base.length) + location.search + location.hash);
+})();
+</script>
 <meta name="theme-color" content="#070A12">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23070A12'/%3E%3Crect x='11' y='15' width='42' height='34' rx='3' fill='none' stroke='%23E3AA3E' stroke-width='3.2'/%3E%3Cpath d='M11 24.5h42' stroke='%23E3AA3E' stroke-width='2.4'/%3E%3Cpath d='M18 31h22M18 36.5h14' stroke='%237FB6E0' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='43.5' r='2.4' fill='none' stroke='%23E3AA3E' stroke-width='2'/%3E%3C/svg%3E">
 <style>
