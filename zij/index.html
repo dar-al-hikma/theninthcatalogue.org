@@ -187,6 +187,9 @@
   .copy:hover{color:var(--brass);border-color:var(--brass)}
   .copy[hidden]{display:none}
 
+  .checksums{color:var(--muted);font-size:.98rem;margin:1.6rem 0 0;max-width:58ch}
+  .checksums a{color:var(--vellum);text-decoration:none;border-bottom:1px solid var(--line)}
+  .checksums a:hover{color:var(--brass);border-bottom-color:var(--brass)}
   .more{font-family:var(--f-ui);font-size:.86rem;color:var(--muted-2);margin:1.8rem 0 0;line-height:1.9}
   .more a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
   .more a:hover{color:var(--brass);border-bottom-color:var(--brass)}
@@ -241,14 +244,14 @@
     <div class="downloads">
       <div class="dl" id="windows" data-os="windows">
         <div class="dl-head"><h3>Windows</h3><span class="req">Windows 10 or 11, 64-bit</span></div>
-        <a class="btn" href="https://github.com/dar-al-hikma/Zij/releases/latest/download/Zij-windows.zip">Download for Windows<span class="size">zip · about 400 MB</span></a>
+        <a class="btn" href="https://github.com/dar-al-hikma/Zij/releases/latest/download/Zij-windows.zip">Download for Windows<span class="size">zip · about 430 MB</span></a>
         <p>Right-click the zip and choose <b>Extract All</b>, then open <b>Zij</b> in the folder it makes. It will not run from inside the zip.</p>
         <p>The first time, Windows may say it has protected your PC from an unrecognised app. Choose <b>More info</b>, then <b>Run anyway</b>.</p>
       </div>
 
       <div class="dl" id="macos" data-os="macos">
         <div class="dl-head"><h3>macOS</h3><span class="req">Apple silicon: M1 or later</span></div>
-        <a class="btn" href="https://github.com/dar-al-hikma/Zij/releases/latest/download/Zij-macos.zip">Download for macOS<span class="size">zip · about 400 MB</span></a>
+        <a class="btn" href="https://github.com/dar-al-hikma/Zij/releases/latest/download/Zij-macos.zip">Download for macOS<span class="size">zip · about 175 MB</span></a>
         <p>Open the zip if your browser has not already, move <b>Zij</b> to Applications if you like, and open it.</p>
         <p>The first time, macOS will say it cannot verify the developer. On macOS 15 or later, open <b>System Settings › Privacy &amp; Security</b>, scroll down and choose <b>Open Anyway</b>. On earlier versions, Control-click <b>Zij</b> and choose <b>Open</b>.</p>
         <p class="aside">There is no build for Macs with Intel processors. They can run Zīj from its source, as on Linux.</p>
@@ -256,20 +259,21 @@
 
       <div class="dl" id="linux" data-os="linux">
         <div class="dl-head"><h3>Linux</h3><span class="req">From source</span></div>
-        <p>There is no packaged download for Linux yet. Zīj runs from its source with Python 3.14 and opens in your browser. One of its parts is compiled as it installs, so you need a C compiler and Python’s development files; on Debian or Ubuntu, <code>build-essential</code>, <code>python3.14-dev</code> and <code>python3.14-venv</code>.</p>
+        <p>There is no packaged download for Linux yet. Zīj runs from its source with Python 3.14, in your browser. One of its parts is compiled as it installs, so you need a C compiler and Python’s development files; on Debian or Ubuntu, <code>build-essential</code>, <code>python3.14-dev</code> and <code>python3.14-venv</code>.</p>
         <div class="cmd">
 <pre><code id="linux-cmd">git clone --depth 1 https://github.com/dar-al-hikma/Zij.git
 cd Zij
 python3.14 -m venv .venv
 . .venv/bin/activate
 pip install -r requirements.txt
-streamlit run app.py --server.address 127.0.0.1 \
-  --browser.gatherUsageStats false</code></pre>
+python run_source.py</code></pre>
           <button class="copy" type="button" data-for="linux-cmd" hidden>Copy</button>
         </div>
-        <p class="aside">The last two settings keep the app to this computer and send no usage statistics. While it runs, other accounts on the same computer can reach it too.</p>
+        <p class="aside">Open the address it prints. It carries a key made for this run alone, and the app answers only there; Ctrl-C stops it. It serves this computer only, though other accounts on the same computer can reach it while it runs.</p>
       </div>
     </div>
+
+    <p class="checksums">Each release lists the SHA-256 of its zips in <a href="https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS">SHA256SUMS</a>. To check a download, compare its hash with its line there: <code>shasum -a 256 Zij-macos.zip</code> on macOS, or <code>Get-FileHash Zij-windows.zip</code> in PowerShell on Windows, which prints it in capitals.</p>
 
     <p class="more"><a href="https://github.com/dar-al-hikma/Zij/releases">Release notes and earlier versions</a> · <a href="https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md">The texts it cites</a> · <a href="https://github.com/dar-al-hikma/Zij">Source code</a>, under the AGPL-3.0</p>
   </section>
