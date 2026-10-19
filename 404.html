@@ -36,14 +36,64 @@
   p{color:var(--muted);margin:0 0 1.6rem;font-style:italic}
   a{color:var(--brass);text-decoration:none;border-bottom:1px solid var(--line)}
   a:hover{border-bottom-color:var(--brass)}
+  body.cjk p{font-style:normal;line-height:1.85}
 </style>
 </head>
 <body>
 <main>
   <p class="acc">Cat. IX · —</p>
-  <h1>Not in the catalogue</h1>
-  <p>Nothing in the catalogue is shelved at this address.</p>
+  <h1 data-i18n="h1">Not in the catalogue</h1>
+  <p data-i18n="p">Nothing in the catalogue is shelved at this address.</p>
   <a href="/">The Ninth Catalogue</a>
 </main>
+<script>
+// The page in the reader's language: the one last chosen on any of the catalogue's pages (dah.lang), else the
+// browser's, else English. The English is the page itself.
+(function(){
+  var I18N = {
+    nb: {
+      "h1": "Ikke i katalogen",
+      "p": "Ingenting i katalogen står oppstilt på denne adressen."
+    },
+    es: {
+      "h1": "No está en el catálogo",
+      "p": "Nada del catálogo se guarda en esta dirección."
+    },
+    fr: {
+      "h1": "Absent du catalogue",
+      "p": "Rien du catalogue n’est rangé à cette adresse."
+    },
+    de: {
+      "h1": "Nicht im Katalog",
+      "p": "Unter dieser Adresse ist nichts aus dem Katalog aufgestellt."
+    },
+    zh: {
+      "h1": "目录中没有此条目",
+      "p": "这个地址上没有收录任何目录条目。"
+    },
+    ja: {
+      "h1": "目録にありません",
+      "p": "このアドレスには、目録のどの品も配架されていません。"
+    }
+  };
+  var TAGS = { en:'en', nb:'nb', es:'es', fr:'fr', de:'de', zh:'zh-Hans', ja:'ja' };
+  var els = document.querySelectorAll('[data-i18n]');
+  function pick(){
+    var saved = null;
+    try { saved = localStorage.getItem('dah.lang'); } catch (e) {}
+    if (saved && TAGS[saved]) return saved;
+    var list = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+    for (var i = 0; i < list.length; i++){ var t = String(list[i]).toLowerCase();
+      if (/^(nb|no|nn)\b/.test(t)) return 'nb';
+      var cs = ['es','fr','de','zh','ja','en'];
+      for (var j = 0; j < cs.length; j++) if (t.indexOf(cs[j]) === 0) return cs[j]; }
+    return 'en';
+  }
+  var l = pick(), T = I18N[l] || {};
+  for (var i = 0; i < els.length; i++){ var v = T[els[i].getAttribute('data-i18n')]; if (v != null) els[i].textContent = v; }
+  document.documentElement.setAttribute('lang', TAGS[l]);
+  document.body.classList.toggle('cjk', l === 'zh' || l === 'ja');
+})();
+</script>
 </body>
 </html>

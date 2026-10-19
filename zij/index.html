@@ -70,6 +70,16 @@
   .crumb{font-family:var(--f-display);font-size:1rem;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
   .crumb:hover{color:var(--brass);border-bottom-color:var(--brass)}
   .acc{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin:0}
+  /* The accession number shares the right of the top line with the language menu, styled as the shelf's. */
+  .topline-end{display:flex;align-items:baseline;gap:1rem;margin-left:auto}
+  .langsw select{
+    background:rgba(13,18,32,.88);border:1px solid var(--line);border-radius:2px;
+    color:var(--brass);font-family:var(--f-ui);font-size:.72rem;font-weight:500;
+    letter-spacing:.06em;padding-block:4px;padding-left:8px;padding-right:6px;
+    cursor:pointer;transition:border-color .15s;
+  }
+  .langsw select:hover{border-color:var(--brass)}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 
   h1{
     font-size:clamp(2.8rem,9vw,4rem);
@@ -209,6 +219,10 @@
   footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
   footer a:hover{color:var(--brass);border-bottom-color:var(--brass)}
   .ui-name{font-family:var(--f-display);font-size:1.08em}
+  /* CJK, as on the shelf: more leading, no faux italic, no wide tracking. */
+  body.cjk .lede,body.cjk .points li,body.cjk .note,body.cjk .checksums,body.cjk .dl p{line-height:1.85}
+  body.cjk em,body.cjk .byline,body.cjk .mobile-note,body.cjk .dl p.aside{font-style:normal}
+  body.cjk h2,body.cjk .dl .req,body.cjk .dl .here,body.cjk .copy,body.cjk .btn .size{letter-spacing:.04em}
   @media (prefers-reduced-motion:reduce){.btn{transition:none}}
 </style>
 <script type="application/ld+json">
@@ -220,51 +234,65 @@
 
   <div class="topline">
     <a class="crumb" href="../">The Ninth Catalogue</a>
-    <p class="acc">Cat. IX · 2</p>
+    <div class="topline-end">
+      <p class="acc">Cat. IX · 2</p>
+      <div class="langsw" hidden>
+        <label class="visually-hidden" for="langSel" data-i18n="language">Language</label>
+        <select id="langSel">
+          <option value="en" lang="en">English</option>
+          <option value="nb" lang="nb">Norsk bokmål</option>
+          <option value="es" lang="es">Español</option>
+          <option value="fr" lang="fr">Français</option>
+          <option value="de" lang="de">Deutsch</option>
+          <option value="zh" lang="zh-Hans">简体中文</option>
+          <option value="ja" lang="ja">日本語</option>
+        </select>
+      </div>
+    </div>
   </div>
 
   <header>
     <h1>Zīj</h1>
     <p class="arabic" lang="ar" dir="rtl">زِيج</p>
-    <p class="byline">Free desktop software from <a href="../">The Ninth Catalogue™</a></p>
-    <p class="lede">A <em>zīj</em> is a set of astronomical tables with the rules for using them. This one is a study companion for traditional natal astrology: cast a chart, then check, table by table, what the texts say about it.</p>
+    <p class="byline" data-i18n-html="byline">Free desktop software from <a href="../">The Ninth Catalogue™</a></p>
+    <p class="lede" data-i18n-html="lede">A <em>zīj</em> is a set of astronomical tables with the rules for using them. This one is a study companion for traditional natal astrology: cast a chart, then check, table by table, what the texts say about it.</p>
     <ul class="points">
-      <li>The rules come chiefly from Benjamin Dykes’s translations of Sahl b. Bishr and Abū Ma’shar, and every rule a page applies names the passage it comes from.</li>
-      <li>Other translations (Holden’s Rhetorius and Morin, Riley’s Valens, more of Dykes’s) serve only as witnesses: to settle a reading those two leave open, to answer where they are silent, or to stand beside a value where the sources disagree, never to replace one. <a href="https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md">The references</a> give every text and its part.</li>
-      <li>Where a text leaves something open, the page says so and shows the reading it made. Where the texts settle nothing, the result is reported <em>unresolved</em>, with its reason and the alternatives.</li>
-      <li>It works offline: places come from a bundled atlas, and the planets from the built-in Moshier ephemeris.</li>
-      <li>The judgment of the chart is the astrologer’s.</li>
+      <li data-i18n="point.rules">The rules come chiefly from Benjamin Dykes’s translations of Sahl b. Bishr and Abū Ma’shar, and every rule a page applies names the passage it comes from.</li>
+      <li data-i18n-html="point.witnesses">Other translations (Holden’s Rhetorius and Morin, Riley’s Valens, more of Dykes’s) serve only as witnesses: to settle a reading those two leave open, to answer where they are silent, or to stand beside a value where the sources disagree, never to replace one. <a href="https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md">The references</a> give every text and its part.</li>
+      <li data-i18n-html="point.open">Where a text leaves something open, the page says so and shows the reading it made. Where the texts settle nothing, the result is reported <em>unresolved</em>, with its reason and the alternatives.</li>
+      <li data-i18n="point.offline">It works offline: places come from a bundled atlas, and the planets from the built-in Moshier ephemeris.</li>
+      <li data-i18n="point.judgment">The judgment of the chart is the astrologer’s.</li>
     </ul>
   </header>
 
   <div class="rule"></div>
 
   <section aria-labelledby="dl-h">
-    <h2 id="dl-h">Free download</h2>
-    <p class="mobile-note">Zīj runs on a desktop or laptop computer, not on a phone or tablet.</p>
-    <p class="note">Zīj is free to download and use. Each download is portable: unzip it and run it. There is no installer, and once it is on your computer it needs no internet. Your saved charts and preferences live in your own data folder and carry over from one version to the next. The links always fetch the current release.</p>
+    <h2 id="dl-h" data-i18n="dl">Free download</h2>
+    <p class="mobile-note" data-i18n="mobile">Zīj runs on a desktop or laptop computer, not on a phone or tablet.</p>
+    <p class="note" data-i18n="note">Zīj is free to download and use. Each download is portable: unzip it and run it. There is no installer, and once it is on your computer it needs no internet. Your saved charts and preferences live in your own data folder and carry over from one version to the next. The links always fetch the current release. Zīj itself is in English.</p>
 
-    <p class="checksums">These builds are not signed, so Windows and macOS will warn you the first time you open one. To check a download first, compare its SHA-256 with its line in <a href="https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS">SHA256SUMS</a>, which each release publishes: <code>shasum -a 256 Zij-macos.zip</code> on macOS, or <code>Get-FileHash Zij-windows.zip</code> in PowerShell on Windows, which prints it in capitals. If they differ, download it again rather than opening it.</p>
+    <p class="checksums" data-i18n-html="checksums">These builds are not signed, so Windows and macOS will warn you the first time you open one. To check a download first, compare its SHA-256 with its line in <a href="https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS">SHA256SUMS</a>, which each release publishes: <code>shasum -a 256 Zij-macos.zip</code> on macOS, or <code>Get-FileHash Zij-windows.zip</code> in PowerShell on Windows, which prints it in capitals. If they differ, download it again rather than opening it.</p>
 
     <div class="downloads">
       <div class="dl" id="windows" data-os="windows">
-        <div class="dl-head"><h3>Windows</h3><span class="req">Windows 10 or 11, 64-bit</span></div>
-        <a class="btn" href="https://github.com/dar-al-hikma/Zij/releases/latest/download/Zij-windows.zip">Download for Windows<span class="size">zip · about 430 MB</span></a>
-        <p>Right-click the zip and choose <b>Extract All</b>, then open <b>Zij</b> in the folder it makes. It will not run from inside the zip.</p>
-        <p>The first time, Windows may say it has protected your PC from an unrecognised app. Choose <b>More info</b>, then <b>Run anyway</b>.</p>
+        <div class="dl-head"><h3>Windows</h3><span class="req" data-i18n="win.req">Windows 10 or 11, 64-bit</span></div>
+        <a class="btn" data-i18n-html="win.btn" href="https://github.com/dar-al-hikma/Zij/releases/latest/download/Zij-windows.zip">Download for Windows<span class="size">zip · about 430 MB</span></a>
+        <p data-i18n-html="win.unzip">Right-click the zip and choose <b>Extract All</b>, then open <b>Zij</b> in the folder it makes. It will not run from inside the zip.</p>
+        <p data-i18n-html="win.warn">The first time, Windows may say it has protected your PC from an unrecognised app. Choose <b>More info</b>, then <b>Run anyway</b>.</p>
       </div>
 
       <div class="dl" id="macos" data-os="macos">
-        <div class="dl-head"><h3>macOS</h3><span class="req">Apple silicon: M1 or later</span></div>
-        <a class="btn" href="https://github.com/dar-al-hikma/Zij/releases/latest/download/Zij-macos.zip">Download for macOS<span class="size">zip · about 175 MB</span></a>
-        <p>Open the zip if your browser has not already, move <b>Zij</b> to Applications if you like, and open it.</p>
-        <p>The first time, macOS will say it cannot verify the developer. On macOS 15 or later, open <b>System Settings › Privacy &amp; Security</b>, scroll down and choose <b>Open Anyway</b>. On earlier versions, Control-click <b>Zij</b> and choose <b>Open</b>.</p>
-        <p class="aside">There is no build for Macs with Intel processors. They can run Zīj from its source, as on Linux.</p>
+        <div class="dl-head"><h3>macOS</h3><span class="req" data-i18n="mac.req">Apple silicon: M1 or later</span></div>
+        <a class="btn" data-i18n-html="mac.btn" href="https://github.com/dar-al-hikma/Zij/releases/latest/download/Zij-macos.zip">Download for macOS<span class="size">zip · about 175 MB</span></a>
+        <p data-i18n-html="mac.open">Open the zip if your browser has not already, move <b>Zij</b> to Applications if you like, and open it.</p>
+        <p data-i18n-html="mac.warn">The first time, macOS will say it cannot verify the developer. On macOS 15 or later, open <b>System Settings › Privacy &amp; Security</b>, scroll down and choose <b>Open Anyway</b>. On earlier versions, Control-click <b>Zij</b> and choose <b>Open</b>.</p>
+        <p class="aside" data-i18n="mac.intel">There is no build for Macs with Intel processors. They can run Zīj from its source, as on Linux.</p>
       </div>
 
       <div class="dl" id="linux" data-os="linux">
-        <div class="dl-head"><h3>Linux</h3><span class="req">From source</span></div>
-        <p>There is no packaged download for Linux yet. Zīj runs from its source with Python 3.14, in your browser. One of its parts is compiled as it installs, so you need a C compiler and Python’s development files; on Debian or Ubuntu, <code>build-essential</code>, <code>python3.14-dev</code> and <code>python3.14-venv</code>.</p>
+        <div class="dl-head"><h3>Linux</h3><span class="req" data-i18n="linux.req">From source</span></div>
+        <p data-i18n-html="linux.source">There is no packaged download for Linux yet. Zīj runs from its source with Python 3.14, in your browser. One of its parts is compiled as it installs, so you need a C compiler and Python’s development files; on Debian or Ubuntu, <code>build-essential</code>, <code>python3.14-dev</code> and <code>python3.14-venv</code>.</p>
         <div class="cmd">
 <pre><code id="linux-cmd">git clone --depth 1 https://github.com/dar-al-hikma/Zij.git
 cd Zij
@@ -272,25 +300,225 @@ python3.14 -m venv .venv
 . .venv/bin/activate
 pip install -r requirements.txt
 python run_source.py</code></pre>
-          <button class="copy" type="button" data-for="linux-cmd" hidden>Copy</button>
+          <button class="copy" type="button" data-for="linux-cmd" data-i18n="copy" hidden>Copy</button>
         </div>
-        <p class="aside">Open the address it prints. It carries a key made for this run alone, and the app answers only there; Ctrl-C stops it. It serves this computer only, though other accounts on the same computer can reach it while it runs.</p>
+        <p class="aside" data-i18n="linux.run">Open the address it prints. It carries a key made for this run alone, and the app answers only there; Ctrl-C stops it. It serves this computer only, though other accounts on the same computer can reach it while it runs.</p>
       </div>
     </div>
 
-    <p class="more"><a href="https://github.com/dar-al-hikma/Zij/releases">Release notes and earlier versions</a> · <a href="https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md">The texts it cites</a> · <a href="https://github.com/dar-al-hikma/Zij">Source code</a>, under the AGPL-3.0</p>
+    <p class="more" data-i18n-html="more"><a href="https://github.com/dar-al-hikma/Zij/releases">Release notes and earlier versions</a> · <a href="https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md">The texts it cites</a> · <a href="https://github.com/dar-al-hikma/Zij">Source code</a>, under the AGPL-3.0</p>
   </section>
 
   <footer>
-    <p>Published by <a href="../">The Ninth Catalogue</a> · <a href="mailto:curator@theninthcatalogue.org">curator@theninthcatalogue.org</a></p>
-    <p>Also in the catalogue: <a class="ui-name" href="https://dar-al-hikma.github.io/">Dār al-Ḥikma</a>, small tools for the browser.</p>
+    <p data-i18n-html="footer.publisher">Published by <a href="../">The Ninth Catalogue</a> · <a href="mailto:curator@theninthcatalogue.org">curator@theninthcatalogue.org</a></p>
+    <p data-i18n-html="footer.also">Also in the catalogue: <a class="ui-name" href="https://dar-al-hikma.github.io/">Dār al-Ḥikma</a>, small tools for the browser.</p>
   </footer>
 
 </div>
 <script>
-// Without this script the page is whole. With it, the download for the reader's own system
-// is marked, a phone or tablet is told that Zīj is for a computer, and the commands get a copy button.
+// Without this script the page is whole, in English. With it, the page is in the reader's language (the one last
+// chosen on any of the catalogue's pages, dah.lang, else the browser's, else English), the download for the reader's
+// own system is marked, a phone or tablet is told that Zīj is for a computer, and the commands get a copy button.
+// The English is the page itself; a key a language lacks stays English.
 (function(){
+  var I18N = {
+    // English only for the strings the script makes; the rest of the English is the page.
+    en: { "here": "This computer", "copied": "Copied" },
+    nb: {
+      "language": "Språk",
+      "byline": "Gratis skrivebordsprogramvare fra <a href=\"../\">The Ninth Catalogue™</a>",
+      "lede": "En <em>zīj</em> er et astronomisk tabellverk med reglene for hvordan det brukes. Denne er en studiehjelp i tradisjonell fødselsastrologi: sett opp et horoskop, og se så, tabell for tabell, hva tekstene sier om det.",
+      "point.rules": "Reglene kommer først og fremst fra Benjamin Dykes’ oversettelser av Sahl b. Bishr og Abū Ma’shar, og hver regel en side bruker, oppgir stedet i teksten den kommer fra.",
+      "point.witnesses": "Andre oversettelser (Holdens Rhetorius og Morin, Rileys Valens, flere av Dykes’) tjener bare som vitner: til å avgjøre en lesning de to lar stå åpen, til å svare der de tier, eller til å stå ved siden av en verdi der kildene er uenige, aldri til å erstatte den. <a href=\"https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md\">Referansene</a> oppgir hver tekst og hvilken del av den som brukes.",
+      "point.open": "Der en tekst lar noe stå åpent, sier siden det og viser hvilken lesning den har valgt. Der tekstene ikke avgjør noe, oppgis resultatet som <em>unresolved</em> (uavklart), med begrunnelsen og alternativene.",
+      "point.offline": "Det virker uten nett: stedene kommer fra et medfølgende atlas, og planetene fra den innebygde Moshier-efemeriden.",
+      "point.judgment": "Bedømmelsen av horoskopet er astrologens sak.",
+      "dl": "Gratis nedlasting",
+      "mobile": "Zīj kjører på en stasjonær eller bærbar datamaskin, ikke på mobil eller nettbrett.",
+      "note": "Zīj er gratis å laste ned og bruke. Hver nedlasting er portabel: pakk den ut og kjør den. Det finnes ikke noe installasjonsprogram, og når den først ligger på datamaskinen, trenger den ikke internett. Lagrede horoskoper og innstillinger ligger i din egen datamappe og følger med fra én versjon til den neste. Lenkene henter alltid gjeldende versjon. Selve programmet Zīj er på engelsk.",
+      "checksums": "Nedlastingene er ikke signert, så Windows og macOS vil advare deg første gang du åpner en av dem. Vil du kontrollere en nedlasting først, kan du sammenligne SHA-256-verdien med linjen for den i <a href=\"https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS\">SHA256SUMS</a>, som hver utgivelse publiserer: <code>shasum -a 256 Zij-macos.zip</code> på macOS, eller <code>Get-FileHash Zij-windows.zip</code> i PowerShell på Windows, som skriver den med store bokstaver. Er de ulike, last den ned på nytt i stedet for å åpne den.",
+      "win.req": "Windows 10 eller 11, 64-bit",
+      "win.btn": "Last ned for Windows<span class=\"size\">zip · omtrent 430 MB</span>",
+      "win.unzip": "Høyreklikk zip-filen og velg <b>Pakk ut alle</b>, og åpne så <b>Zij</b> i mappen som lages. Programmet kan ikke kjøres fra innsiden av zip-filen.",
+      "win.warn": "Første gang kan Windows si at den har beskyttet PC-en mot en ukjent app. Velg <b>Mer informasjon</b> og deretter <b>Kjør likevel</b>.",
+      "mac.req": "Apple-chip: M1 eller nyere",
+      "mac.btn": "Last ned for macOS<span class=\"size\">zip · omtrent 175 MB</span>",
+      "mac.open": "Åpne zip-filen hvis nettleseren ikke allerede har gjort det, flytt <b>Zij</b> til Apper-mappen om du vil, og åpne det.",
+      "mac.warn": "Første gang sier macOS at utvikleren ikke kan verifiseres. På macOS 15 eller nyere åpner du <b>Systeminnstillinger › Personvern og sikkerhet</b>, ruller ned og velger <b>Åpne likevel</b>. På eldre versjoner holder du nede Kontroll-tasten mens du klikker på <b>Zij</b>, og velger <b>Åpne</b>.",
+      "mac.intel": "Det finnes ingen versjon for Mac-maskiner med Intel-prosessor. De kan kjøre Zīj fra kildekoden, som på Linux.",
+      "linux.req": "Fra kildekoden",
+      "linux.source": "Det finnes ennå ingen ferdigpakket nedlasting for Linux. Zīj kjører fra kildekoden med Python 3.14, i nettleseren. En av delene kompileres under installasjonen, så du trenger en C-kompilator og Pythons utviklingsfiler; på Debian eller Ubuntu <code>build-essential</code>, <code>python3.14-dev</code> og <code>python3.14-venv</code>.",
+      "copy": "Kopier",
+      "linux.run": "Åpne adressen programmet skriver ut. Den inneholder en nøkkel laget bare for denne kjøringen, og programmet svarer bare der; Ctrl-C stopper det. Det betjener bare denne datamaskinen, men andre kontoer på samme maskin kan nå det mens det kjører.",
+      "more": "<a href=\"https://github.com/dar-al-hikma/Zij/releases\">Utgivelsesnotater og tidligere versjoner</a> · <a href=\"https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md\">Tekstene det siterer</a> · <a href=\"https://github.com/dar-al-hikma/Zij\">Kildekoden</a>, under AGPL-3.0",
+      "footer.publisher": "Utgitt av <a href=\"../\">The Ninth Catalogue</a> · <a href=\"mailto:curator@theninthcatalogue.org\">curator@theninthcatalogue.org</a>",
+      "footer.also": "Også i katalogen: <a class=\"ui-name\" href=\"https://dar-al-hikma.github.io/\">Dār al-Ḥikma</a>, små verktøy for nettleseren.",
+      "here": "Denne datamaskinen",
+      "copied": "Kopiert"
+    },
+    es: {
+      "language": "Idioma",
+      "byline": "Software de escritorio gratuito de <a href=\"../\">The Ninth Catalogue™</a>",
+      "lede": "Un <em>zīj</em> es un conjunto de tablas astronómicas con las reglas para usarlas. Este sirve para estudiar la astrología natal tradicional: levante una carta y compruebe después, tabla por tabla, qué dicen de ella los textos.",
+      "point.rules": "Las reglas proceden sobre todo de las traducciones que Benjamin Dykes hizo de Sahl b. Bishr y Abū Ma’shar, y cada regla que aplica una página indica el pasaje del que procede.",
+      "point.witnesses": "Otras traducciones (el Rhetorius y el Morin de Holden, el Valens de Riley, otras de Dykes) solo sirven de testigos: para decidir una lectura que esos dos dejan abierta, para responder donde callan o para situarse junto a un valor cuando las fuentes discrepan, nunca para sustituirlo. <a href=\"https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md\">Las referencias</a> dan cada texto y la parte que se cita.",
+      "point.open": "Cuando un texto deja algo abierto, la página lo dice y muestra la lectura que ha hecho. Cuando los textos no resuelven nada, el resultado se da como <em>unresolved</em> (sin resolver), con su motivo y las alternativas.",
+      "point.offline": "Funciona sin conexión: los lugares salen de un atlas incluido, y los planetas, de las efemérides de Moshier integradas.",
+      "point.judgment": "El juicio de la carta queda en manos de quien la interpreta.",
+      "dl": "Descarga gratuita",
+      "mobile": "Zīj funciona en un ordenador de sobremesa o portátil, no en un teléfono ni en una tableta.",
+      "note": "Descargar y usar Zīj es gratis. Cada descarga es portátil: descomprímala y ejecútela. No hay instalador, y una vez en su ordenador no necesita internet. Sus cartas guardadas y sus preferencias están en su propia carpeta de datos y se conservan de una versión a la siguiente. Los enlaces descargan siempre la versión actual. La propia aplicación Zīj está en inglés.",
+      "checksums": "Estas compilaciones no están firmadas, así que Windows y macOS le avisarán la primera vez que abra una. Para comprobar antes una descarga, compare su SHA-256 con su línea en <a href=\"https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS\">SHA256SUMS</a>, que publica cada versión: <code>shasum -a 256 Zij-macos.zip</code> en macOS, o <code>Get-FileHash Zij-windows.zip</code> en la PowerShell de Windows, que lo muestra en mayúsculas. Si no coinciden, vuelva a descargarla en lugar de abrirla.",
+      "win.req": "Windows 10 u 11, 64 bits",
+      "win.btn": "Descargar para Windows<span class=\"size\">zip · unos 430 MB</span>",
+      "win.unzip": "Haga clic con el botón derecho en el zip, elija <b>Extraer todo</b> y abra <b>Zij</b> en la carpeta que se crea. No funciona desde dentro del zip.",
+      "win.warn": "La primera vez, puede que Windows diga que ha protegido su PC de una aplicación no reconocida. Elija <b>Más información</b> y después <b>Ejecutar de todas formas</b>.",
+      "mac.req": "Chip de Apple: M1 o posterior",
+      "mac.btn": "Descargar para macOS<span class=\"size\">zip · unos 175 MB</span>",
+      "mac.open": "Abra el zip si el navegador no lo ha hecho ya, mueva <b>Zij</b> a la carpeta Aplicaciones si quiere y ábralo.",
+      "mac.warn": "La primera vez, macOS indicará que no se puede verificar el desarrollador. En macOS 15 o posterior, abra <b>Ajustes del Sistema › Privacidad y seguridad</b>, desplácese hacia abajo y elija <b>Abrir igualmente</b>. En versiones anteriores, con la tecla Control pulsada, haga clic en <b>Zij</b> y elija <b>Abrir</b>.",
+      "mac.intel": "No hay versión para Mac con procesador Intel. En ellos, Zīj puede ejecutarse desde su código fuente, como en Linux.",
+      "linux.req": "Desde el código fuente",
+      "linux.source": "Todavía no hay una descarga empaquetada para Linux. Zīj se ejecuta desde su código fuente con Python 3.14, en su navegador. Una de sus partes se compila al instalarse, así que necesita un compilador de C y los archivos de desarrollo de Python; en Debian o Ubuntu, <code>build-essential</code>, <code>python3.14-dev</code> y <code>python3.14-venv</code>.",
+      "copy": "Copiar",
+      "linux.run": "Abra la dirección que muestra. Lleva una clave creada solo para esta ejecución, y la aplicación solo responde ahí; Ctrl-C la detiene. Solo sirve a este ordenador, aunque otras cuentas del mismo ordenador pueden acceder a ella mientras se ejecuta.",
+      "more": "<a href=\"https://github.com/dar-al-hikma/Zij/releases\">Notas de la versión y versiones anteriores</a> · <a href=\"https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md\">Los textos que cita</a> · <a href=\"https://github.com/dar-al-hikma/Zij\">Código fuente</a>, bajo la AGPL-3.0",
+      "footer.publisher": "Publicado por <a href=\"../\">The Ninth Catalogue</a> · <a href=\"mailto:curator@theninthcatalogue.org\">curator@theninthcatalogue.org</a>",
+      "footer.also": "También en el catálogo: <a class=\"ui-name\" href=\"https://dar-al-hikma.github.io/\">Dār al-Ḥikma</a>, pequeñas herramientas para el navegador.",
+      "here": "Este ordenador",
+      "copied": "Copiado"
+    },
+    fr: {
+      "language": "Langue",
+      "byline": "Logiciel de bureau gratuit de <a href=\"../\">The Ninth Catalogue™</a>",
+      "lede": "Un <em>zīj</em> est un recueil de tables astronomiques accompagnées des règles pour s’en servir. Celui-ci est un compagnon d’étude de l’astrologie natale traditionnelle : dressez un thème, puis vérifiez, table par table, ce que les textes en disent.",
+      "point.rules": "Les règles proviennent principalement des traductions de Sahl b. Bishr et d’Abū Ma’shar par Benjamin Dykes, et chaque règle appliquée par une page indique le passage dont elle provient.",
+      "point.witnesses": "D’autres traductions (le Rhetorius et le Morin de Holden, le Valens de Riley, d’autres de Dykes) ne servent que de témoins : pour trancher une lecture que ces deux-là laissent ouverte, pour répondre là où ils se taisent, ou pour se tenir à côté d’une valeur quand les sources divergent, jamais pour la remplacer. <a href=\"https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md\">Les références</a> donnent chaque texte et la partie concernée.",
+      "point.open": "Quand un texte laisse une question ouverte, la page le dit et montre la lecture qu’elle a retenue. Quand les textes ne tranchent rien, le résultat est donné comme <em>unresolved</em> (non résolu), avec sa raison et les autres possibilités.",
+      "point.offline": "Il fonctionne hors ligne : les lieux viennent d’un atlas fourni, et les planètes des éphémérides de Moshier intégrées.",
+      "point.judgment": "Le jugement du thème revient à l’astrologue.",
+      "dl": "Téléchargement gratuit",
+      "mobile": "Zīj fonctionne sur un ordinateur de bureau ou portable, pas sur un téléphone ni sur une tablette.",
+      "note": "Zīj est gratuit, à télécharger comme à utiliser. Chaque téléchargement est portable : décompressez-le et lancez-le. Il n’y a pas de programme d’installation, et une fois sur votre ordinateur, il n’a plus besoin d’internet. Vos thèmes enregistrés et vos préférences sont rangés dans votre propre dossier de données et passent d’une version à la suivante. Les liens téléchargent toujours la version actuelle. Le logiciel Zīj lui-même est en anglais.",
+      "checksums": "Ces versions ne sont pas signées : Windows et macOS vous avertiront la première fois que vous en ouvrirez une. Pour vérifier d’abord un téléchargement, comparez son SHA-256 avec sa ligne dans <a href=\"https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS\">SHA256SUMS</a>, que publie chaque version : <code>shasum -a 256 Zij-macos.zip</code> sur macOS, ou <code>Get-FileHash Zij-windows.zip</code> dans PowerShell sous Windows, qui l’affiche en majuscules. Si les deux diffèrent, téléchargez à nouveau le fichier au lieu de l’ouvrir.",
+      "win.req": "Windows 10 ou 11, 64 bits",
+      "win.btn": "Télécharger pour Windows<span class=\"size\">zip · environ 430 Mo</span>",
+      "win.unzip": "Faites un clic droit sur le zip et choisissez <b>Extraire tout</b>, puis ouvrez <b>Zij</b> dans le dossier créé. Il ne se lance pas depuis l’intérieur du zip.",
+      "win.warn": "La première fois, Windows peut indiquer qu’il a protégé votre ordinateur d’une application non reconnue. Choisissez <b>Informations complémentaires</b>, puis <b>Exécuter quand même</b>.",
+      "mac.req": "Puce Apple : M1 ou ultérieure",
+      "mac.btn": "Télécharger pour macOS<span class=\"size\">zip · environ 175 Mo</span>",
+      "mac.open": "Ouvrez le zip si votre navigateur ne l’a pas déjà fait, déplacez <b>Zij</b> dans le dossier Applications si vous le souhaitez, et ouvrez-le.",
+      "mac.warn": "La première fois, macOS indiquera que le développeur ne peut pas être vérifié. Sous macOS 15 ou version ultérieure, ouvrez <b>Réglages Système › Confidentialité et sécurité</b>, faites défiler vers le bas et choisissez <b>Ouvrir quand même</b>. Sur les versions antérieures, cliquez sur <b>Zij</b> en maintenant la touche Contrôle enfoncée et choisissez <b>Ouvrir</b>.",
+      "mac.intel": "Il n’existe pas de version pour les Mac à processeur Intel. Ils peuvent exécuter Zīj depuis ses sources, comme sous Linux.",
+      "linux.req": "Depuis les sources",
+      "linux.source": "Il n’existe pas encore de téléchargement prêt à l’emploi pour Linux. Zīj s’exécute depuis ses sources avec Python 3.14, dans votre navigateur. L’une de ses parties est compilée à l’installation : il vous faut donc un compilateur C et les fichiers de développement de Python ; sous Debian ou Ubuntu, <code>build-essential</code>, <code>python3.14-dev</code> et <code>python3.14-venv</code>.",
+      "copy": "Copier",
+      "linux.run": "Ouvrez l’adresse qu’il affiche. Elle porte une clé créée pour cette seule exécution, et l’application ne répond qu’à cette adresse ; Ctrl-C l’arrête. Elle ne sert que cet ordinateur, mais d’autres comptes du même ordinateur peuvent y accéder pendant qu’elle tourne.",
+      "more": "<a href=\"https://github.com/dar-al-hikma/Zij/releases\">Notes de version et versions antérieures</a> · <a href=\"https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md\">Les textes qu’il cite</a> · <a href=\"https://github.com/dar-al-hikma/Zij\">Code source</a>, sous licence AGPL-3.0",
+      "footer.publisher": "Publié par <a href=\"../\">The Ninth Catalogue</a> · <a href=\"mailto:curator@theninthcatalogue.org\">curator@theninthcatalogue.org</a>",
+      "footer.also": "Également au catalogue : <a class=\"ui-name\" href=\"https://dar-al-hikma.github.io/\">Dār al-Ḥikma</a>, de petits outils pour le navigateur.",
+      "here": "Cet ordinateur",
+      "copied": "Copié"
+    },
+    de: {
+      "language": "Sprache",
+      "byline": "Kostenlose Desktop-Software von <a href=\"../\">The Ninth Catalogue™</a>",
+      "lede": "Ein <em>Zīj</em> ist ein astronomisches Tafelwerk mit den Regeln für seinen Gebrauch. Dieses hier ist ein Studienbegleiter für die traditionelle Geburtsastrologie: Stellen Sie ein Horoskop und prüfen Sie dann, Tafel für Tafel, was die Texte darüber sagen.",
+      "point.rules": "Die Regeln stammen vor allem aus Benjamin Dykes’ Übersetzungen von Sahl b. Bishr und Abū Ma’shar, und jede Regel, die eine Seite anwendet, nennt die Stelle, aus der sie stammt.",
+      "point.witnesses": "Andere Übersetzungen (Holdens Rhetorius und Morin, Rileys Valens, weitere von Dykes) dienen nur als Zeugen: um eine Lesart zu entscheiden, die jene beiden offenlassen, um zu antworten, wo sie schweigen, oder um neben einem Wert zu stehen, wo die Quellen uneins sind, nie um ihn zu ersetzen. <a href=\"https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md\">Die Quellennachweise</a> nennen jeden Text und den jeweiligen Teil.",
+      "point.open": "Wo ein Text etwas offenlässt, sagt die Seite das und zeigt die Lesart, die sie gewählt hat. Wo die Texte nichts entscheiden, wird das Ergebnis als <em>unresolved</em> (ungeklärt) ausgewiesen, mit Begründung und den Alternativen.",
+      "point.offline": "Es funktioniert offline: Die Orte stammen aus einem mitgelieferten Atlas, die Planeten aus der eingebauten Moshier-Ephemeride.",
+      "point.judgment": "Das Urteil über das Horoskop bleibt Sache derer, die es deuten.",
+      "dl": "Kostenloser Download",
+      "mobile": "Zīj läuft auf einem Desktop-Computer oder Laptop, nicht auf einem Smartphone oder Tablet.",
+      "note": "Zīj ist kostenlos, zum Herunterladen wie zum Benutzen. Jeder Download ist portabel: entpacken und starten. Es gibt kein Installationsprogramm, und ist Zīj einmal auf Ihrem Computer, braucht es kein Internet. Ihre gespeicherten Horoskope und Einstellungen liegen in Ihrem eigenen Datenordner und bleiben von einer Version zur nächsten erhalten. Die Links laden immer die aktuelle Version. Zīj selbst ist auf Englisch.",
+      "checksums": "Diese Downloads sind nicht signiert, deshalb warnen Windows und macOS, wenn Sie einen davon zum ersten Mal öffnen. Um einen Download vorher zu prüfen, vergleichen Sie seinen SHA-256-Wert mit seiner Zeile in <a href=\"https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS\">SHA256SUMS</a>, die jede Version veröffentlicht: <code>shasum -a 256 Zij-macos.zip</code> unter macOS oder <code>Get-FileHash Zij-windows.zip</code> in der PowerShell unter Windows, die ihn in Großbuchstaben ausgibt. Weichen die beiden ab, laden Sie die Datei erneut herunter, statt sie zu öffnen.",
+      "win.req": "Windows 10 oder 11, 64-Bit",
+      "win.btn": "Für Windows herunterladen<span class=\"size\">zip · etwa 430 MB</span>",
+      "win.unzip": "Klicken Sie mit der rechten Maustaste auf die ZIP-Datei, wählen Sie <b>Alle extrahieren</b> und öffnen Sie dann <b>Zij</b> in dem neuen Ordner. Direkt aus der ZIP-Datei heraus startet es nicht.",
+      "win.warn": "Beim ersten Mal meldet Windows womöglich, dass es Ihren Computer vor einer unbekannten App geschützt hat. Wählen Sie <b>Weitere Informationen</b> und dann <b>Trotzdem ausführen</b>.",
+      "mac.req": "Apple Chip: M1 oder neuer",
+      "mac.btn": "Für macOS herunterladen<span class=\"size\">zip · etwa 175 MB</span>",
+      "mac.open": "Öffnen Sie die ZIP-Datei, falls Ihr Browser das nicht schon getan hat, verschieben Sie <b>Zij</b> nach Wunsch in den Ordner „Programme“ und öffnen Sie es.",
+      "mac.warn": "Beim ersten Mal meldet macOS, dass der Entwickler nicht bestätigt werden kann. Öffnen Sie unter macOS 15 oder neuer <b>Systemeinstellungen › Datenschutz &amp; Sicherheit</b>, scrollen Sie nach unten und wählen Sie <b>Dennoch öffnen</b>. Klicken Sie bei älteren Versionen bei gedrückter Taste „ctrl“ auf <b>Zij</b> und wählen Sie <b>Öffnen</b>.",
+      "mac.intel": "Für Macs mit Intel-Prozessor gibt es keinen Build. Auf ihnen läuft Zīj aus dem Quellcode, wie unter Linux.",
+      "linux.req": "Aus dem Quellcode",
+      "linux.source": "Für Linux gibt es noch keinen fertigen Download. Zīj läuft aus dem Quellcode mit Python 3.14, in Ihrem Browser. Einer seiner Teile wird bei der Installation kompiliert, Sie brauchen also einen C-Compiler und die Entwicklungsdateien von Python; unter Debian oder Ubuntu <code>build-essential</code>, <code>python3.14-dev</code> und <code>python3.14-venv</code>.",
+      "copy": "Kopieren",
+      "linux.run": "Öffnen Sie die Adresse, die es ausgibt. Sie enthält einen Schlüssel, der nur für diesen Lauf erzeugt wurde, und die Anwendung antwortet nur dort; Strg-C beendet sie. Sie ist nur von diesem Computer aus erreichbar, doch andere Benutzerkonten auf demselben Computer erreichen sie, solange sie läuft.",
+      "more": "<a href=\"https://github.com/dar-al-hikma/Zij/releases\">Versionshinweise und frühere Versionen</a> · <a href=\"https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md\">Die zitierten Texte</a> · <a href=\"https://github.com/dar-al-hikma/Zij\">Quellcode</a>, unter der AGPL-3.0",
+      "footer.publisher": "Veröffentlicht von <a href=\"../\">The Ninth Catalogue</a> · <a href=\"mailto:curator@theninthcatalogue.org\">curator@theninthcatalogue.org</a>",
+      "footer.also": "Ebenfalls im Katalog: <a class=\"ui-name\" href=\"https://dar-al-hikma.github.io/\">Dār al-Ḥikma</a>, kleine Werkzeuge für den Browser.",
+      "here": "Dieser Computer",
+      "copied": "Kopiert"
+    },
+    zh: {
+      "language": "语言",
+      "byline": "<a href=\"../\">The Ninth Catalogue™</a> 出品的免费桌面软件",
+      "lede": "<em>zīj</em> 是一套天文数表，附有使用这些数表的规则。这一部是学习传统本命占星学的辅助工具：先起盘，再逐表查看典籍对它怎么说。",
+      "point.rules": "规则主要出自 Benjamin Dykes 所译的 Sahl b. Bishr 与 Abū Ma’shar；每个页面应用的每一条规则，都注明它出自哪一段原文。",
+      "point.witnesses": "其他译本（Holden 译的 Rhetorius 与 Morin、Riley 译的 Valens，以及 Dykes 的其他译作）只作旁证：在这两部留下歧义时判定读法，在它们没有提及时作答，或在各家数值不一时把另一个数值并列在旁，但绝不取而代之。<a href=\"https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md\">参考文献</a>列出了每一部典籍及所用的部分。",
+      "point.open": "某部典籍有未定之处时，页面会说明，并给出它所采用的读法。典籍完全无法判定时，结果标为 <em>unresolved</em>（未决），并附上原因与其他可能。",
+      "point.offline": "它可离线使用：地点取自内置的地图集，行星位置取自内置的 Moshier 星历表。",
+      "point.judgment": "对星盘的论断，由占星师自己作出。",
+      "dl": "免费下载",
+      "mobile": "Zīj 运行于台式机或笔记本电脑，不能在手机或平板上使用。",
+      "note": "Zīj 可免费下载和使用。每个下载都是便携版：解压后即可运行。无需安装程序，装到电脑上之后也不需要联网。保存的星盘和偏好设置存放在你自己的数据文件夹中，升级版本时会保留下来。链接总是获取当前版本。Zīj 软件本身为英文界面。",
+      "checksums": "这些构建版本没有签名，所以第一次打开时，Windows 和 macOS 会发出警告。如果想先校验下载的文件，可以把它的 SHA-256 与每个版本都会发布的 <a href=\"https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS\">SHA256SUMS</a> 中对应的那一行比较：在 macOS 上用 <code>shasum -a 256 Zij-macos.zip</code>，在 Windows 上用 PowerShell 运行 <code>Get-FileHash Zij-windows.zip</code>（它以大写字母显示）。如果两者不同，请重新下载，不要打开。",
+      "win.req": "Windows 10 或 11，64 位",
+      "win.btn": "下载 Windows 版<span class=\"size\">zip · 约 430 MB</span>",
+      "win.unzip": "右键单击 zip 文件，选择“<b>全部解压缩</b>”，然后打开解压出的文件夹中的“<b>Zij</b>”。直接在 zip 文件里无法运行。",
+      "win.warn": "第一次运行时，Windows 可能会提示它已阻止一个无法识别的应用，以保护你的电脑。请选择“<b>更多信息</b>”，然后选择“<b>仍要运行</b>”。",
+      "mac.req": "Apple 芯片：M1 或更新",
+      "mac.btn": "下载 macOS 版<span class=\"size\">zip · 约 175 MB</span>",
+      "mac.open": "如果浏览器还没有自动解压，请打开 zip 文件；愿意的话把“<b>Zij</b>”移到“应用程序”文件夹，然后打开它。",
+      "mac.warn": "第一次打开时，macOS 会提示无法验证开发者。在 macOS 15 或更新版本上，打开“<b>系统设置 › 隐私与安全性</b>”，向下滚动并点按“<b>仍要打开</b>”。在更早的版本上，按住 Control 键点按“<b>Zij</b>”，然后选择“<b>打开</b>”。",
+      "mac.intel": "没有适用于 Intel 处理器 Mac 的版本。这类 Mac 可以像 Linux 一样从源代码运行 Zīj。",
+      "linux.req": "从源代码运行",
+      "linux.source": "Linux 暂时还没有打包好的下载。Zīj 用 Python 3.14 从源代码运行，界面显示在浏览器中。其中一个组件会在安装时编译，所以你需要 C 编译器和 Python 的开发文件；在 Debian 或 Ubuntu 上，即 <code>build-essential</code>、<code>python3.14-dev</code> 和 <code>python3.14-venv</code>。",
+      "copy": "复制",
+      "linux.run": "打开它打印出的地址。该地址带有仅为本次运行生成的密钥，应用只在那里响应；按 Ctrl-C 停止。它只对本机提供服务，不过在它运行期间，同一台电脑上的其他账户也能访问它。",
+      "more": "<a href=\"https://github.com/dar-al-hikma/Zij/releases\">版本说明与早期版本</a> · <a href=\"https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md\">它引用的典籍</a> · <a href=\"https://github.com/dar-al-hikma/Zij\">源代码</a>，采用 AGPL-3.0 许可",
+      "footer.publisher": "由 <a href=\"../\">The Ninth Catalogue</a> 出版 · <a href=\"mailto:curator@theninthcatalogue.org\">curator@theninthcatalogue.org</a>",
+      "footer.also": "目录中另有：<a class=\"ui-name\" href=\"https://dar-al-hikma.github.io/\">Dār al-Ḥikma</a>，在浏览器中使用的小工具。",
+      "here": "本机",
+      "copied": "已复制"
+    },
+    ja: {
+      "language": "言語",
+      "byline": "<a href=\"../\">The Ninth Catalogue™</a> の無料デスクトップソフトウェア",
+      "lede": "<em>zīj</em>（ズィージュ）とは、天文の数表とその使い方の規則をまとめたものです。この Zīj は伝統的な出生占星術の学習を助けるアプリです。チャートを立て、文献がそれについて何と言っているかを表ごとに確かめます。",
+      "point.rules": "規則はおもに Benjamin Dykes による Sahl b. Bishr と Abū Ma’shar の翻訳から取られており、各ページが適用する規則にはすべて、その出典の箇所が示されています。",
+      "point.witnesses": "ほかの翻訳（Holden 訳の Rhetorius と Morin、Riley 訳の Valens、Dykes のほかの訳書）は、傍証としてのみ使われます。この二つが読みを決めていない箇所でそれを定めるため、両者が何も述べていない点に答えるため、あるいは資料の値が食い違うところで別の値を並べて示すためであり、決して置き換えることはありません。<a href=\"https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md\">参考文献</a>に、すべての文献とその該当部分を挙げています。",
+      "point.open": "文献が何かを決めずにいる箇所では、ページがそのことを明記し、採用した読みを示します。文献から何も決まらない場合は、結果を <em>unresolved</em>（未解決）とし、その理由とほかの可能性を添えて示します。",
+      "point.offline": "オフラインで動きます。地名は同梱の地図帳から、惑星の位置は内蔵の Moshier 天文暦から求めます。",
+      "point.judgment": "チャートの判断は占星術師に委ねられます。",
+      "dl": "無料ダウンロード",
+      "mobile": "Zīj はデスクトップまたはノートパソコンで動作します。スマートフォンやタブレットでは使えません。",
+      "note": "Zīj は無料でダウンロードして使えます。どのダウンロードもポータブル版で、展開すればそのまま実行できます。インストーラーはなく、いったんコンピューターに入れればインターネット接続は不要です。保存したチャートや設定はご自身のデータフォルダーに保存され、バージョンを上げても引き継がれます。リンクからは常に最新のリリースを取得します。Zīj 本体は英語版です。",
+      "checksums": "これらのビルドには署名がないため、初めて開くときに Windows や macOS が警告を表示します。先にダウンロードを確かめるには、その SHA-256 を、各リリースが公開している <a href=\"https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS\">SHA256SUMS</a> の該当行と照合してください。macOS では <code>shasum -a 256 Zij-macos.zip</code>、Windows では PowerShell で <code>Get-FileHash Zij-windows.zip</code> を実行します（後者は大文字で表示します）。一致しない場合は、開かずにもう一度ダウンロードしてください。",
+      "win.req": "Windows 10 または 11、64 ビット",
+      "win.btn": "Windows 版をダウンロード<span class=\"size\">zip · 約 430 MB</span>",
+      "win.unzip": "zip ファイルを右クリックして「<b>すべて展開</b>」を選び、できたフォルダーの中の「<b>Zij</b>」を開きます。zip の中からは実行できません。",
+      "win.warn": "初回は、認識されないアプリから PC を保護したと Windows が表示することがあります。「<b>詳細情報</b>」を選び、続いて「<b>実行</b>」を選びます。",
+      "mac.req": "Apple シリコン：M1 以降",
+      "mac.btn": "macOS 版をダウンロード<span class=\"size\">zip · 約 175 MB</span>",
+      "mac.open": "ブラウザがまだ展開していなければ zip を開き、必要なら「<b>Zij</b>」を「アプリケーション」フォルダに移動して、開きます。",
+      "mac.warn": "初回は、開発元を検証できないと macOS が表示します。macOS 15 以降では「<b>システム設定 › プライバシーとセキュリティ</b>」を開き、下にスクロールして「<b>このまま開く</b>」を選びます。それより前のバージョンでは、Controlキーを押しながら「<b>Zij</b>」をクリックし、「<b>開く</b>」を選びます。",
+      "mac.intel": "Intel プロセッサ搭載の Mac 向けのビルドはありません。Linux と同じく、ソースから Zīj を実行できます。",
+      "linux.req": "ソースから",
+      "linux.source": "Linux 向けのパッケージ版はまだありません。Zīj は Python 3.14 でソースから実行し、ブラウザで使います。一部のコンポーネントがインストール時にコンパイルされるため、C コンパイラと Python の開発用ファイルが必要です。Debian や Ubuntu では <code>build-essential</code>、<code>python3.14-dev</code>、<code>python3.14-venv</code> です。",
+      "copy": "コピー",
+      "linux.run": "表示されたアドレスを開きます。このアドレスにはこの実行専用に作られたキーが含まれ、アプリはそこでしか応答しません。Ctrl-C で停止します。このコンピューターからしか利用できませんが、実行中は同じコンピューターのほかのアカウントからもアクセスできます。",
+      "more": "<a href=\"https://github.com/dar-al-hikma/Zij/releases\">リリースノートと過去のバージョン</a> · <a href=\"https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md\">引用している文献</a> · <a href=\"https://github.com/dar-al-hikma/Zij\">ソースコード</a>（AGPL-3.0）",
+      "footer.publisher": "発行：<a href=\"../\">The Ninth Catalogue</a> · <a href=\"mailto:curator@theninthcatalogue.org\">curator@theninthcatalogue.org</a>",
+      "footer.also": "目録にはほかに <a class=\"ui-name\" href=\"https://dar-al-hikma.github.io/\">Dār al-Ḥikma</a> もあります。ブラウザで使う小さな道具集です。",
+      "here": "このコンピューター",
+      "copied": "コピー済み"
+    }
+  };
+  var TAGS = { en:'en', nb:'nb', es:'es', fr:'fr', de:'de', zh:'zh-Hans', ja:'ja' };
+
   var ua = navigator.userAgent || '', plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '';
   var mobile = /Android|iPhone|iPad|iPod/i.test(ua) || (/Mac/i.test(plat) && navigator.maxTouchPoints > 1);
   var os = mobile ? '' : /Win/i.test(plat) ? 'windows' : /Mac/i.test(plat) ? 'macos' : /Linux|X11/i.test(plat) && !/CrOS/i.test(ua) ? 'linux' : '';
@@ -299,17 +527,48 @@ python run_source.py</code></pre>
   if (card){
     card.classList.add('yours');
     var tag = document.createElement('span');
-    tag.className = 'here'; tag.textContent = 'This computer';
+    tag.className = 'here'; tag.setAttribute('data-i18n', 'here'); tag.textContent = I18N.en.here;
     card.querySelector('h3').appendChild(tag);
     card.parentNode.insertBefore(card, card.parentNode.firstChild);
   }
+
+  var els = document.querySelectorAll('[data-i18n],[data-i18n-html]'), EN = {}, lang = 'en';
+  for (var k in I18N.en) EN[k] = I18N.en[k];
+  function key(e){ return e.getAttribute('data-i18n') || e.getAttribute('data-i18n-html'); }
+  for (var i = 0; i < els.length; i++){ var e = els[i]; EN[key(e)] = e.hasAttribute('data-i18n-html') ? e.innerHTML : e.textContent; }
+  function say(k){ var T = I18N[lang] || {}; return T[k] != null ? T[k] : EN[k]; }
+  function pick(){
+    var saved = null;
+    try { saved = localStorage.getItem('dah.lang'); } catch (e) {}
+    if (saved && TAGS[saved]) return saved;
+    var list = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+    for (var i = 0; i < list.length; i++){ var t = String(list[i]).toLowerCase();
+      if (/^(nb|no|nn)\b/.test(t)) return 'nb';
+      var cs = ['es','fr','de','zh','ja','en'];
+      for (var j = 0; j < cs.length; j++) if (t.indexOf(cs[j]) === 0) return cs[j]; }
+    return 'en';
+  }
+  var sel = document.getElementById('langSel');
+  function apply(l, save){
+    lang = l;
+    for (var i = 0; i < els.length; i++){ var e = els[i], v = say(key(e));
+      if (e.hasAttribute('data-i18n-html')) e.innerHTML = v; else e.textContent = v; }
+    document.documentElement.setAttribute('lang', TAGS[l]);
+    document.body.classList.toggle('cjk', l === 'zh' || l === 'ja');
+    sel.value = l;
+    if (save) try { localStorage.setItem('dah.lang', l); } catch (e) {}
+  }
+  sel.addEventListener('change', function(){ apply(TAGS[sel.value] ? sel.value : 'en', true); });
+  apply(pick(), false);
+  sel.parentNode.hidden = false;
+
   var btns = document.querySelectorAll('.copy');
   for (var i = 0; i < btns.length; i++) (function(b){
     if (!navigator.clipboard || !window.isSecureContext) return;
     b.hidden = false;
     b.addEventListener('click', function(){
       navigator.clipboard.writeText(document.getElementById(b.getAttribute('data-for')).textContent).then(function(){
-        b.textContent = 'Copied'; setTimeout(function(){ b.textContent = 'Copy'; }, 1600);
+        b.textContent = say('copied'); setTimeout(function(){ b.textContent = say('copy'); }, 1600);
       }, function(){});
     });
   })(btns[i]);

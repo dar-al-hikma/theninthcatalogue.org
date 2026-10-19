@@ -72,8 +72,18 @@
     letter-spacing:.16em;
     text-transform:uppercase;
     color:var(--brass);
-    margin:0 0 1rem;
+    margin:0;
   }
+  /* The accession line shares its line with the language menu, styled as the shelf's. */
+  .topline{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem 1rem;flex-wrap:wrap;margin:0 0 1rem}
+  .langsw select{
+    background:rgba(13,18,32,.88);border:1px solid var(--line);border-radius:2px;
+    color:var(--brass);font-family:var(--f-ui);font-size:.72rem;font-weight:500;
+    letter-spacing:.06em;padding-block:4px;padding-left:8px;padding-right:6px;
+    cursor:pointer;transition:border-color .15s;
+  }
+  .langsw select:hover{border-color:var(--brass)}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
   h1{
     font-size:clamp(2.3rem,7vw,3.4rem);
     font-weight:500;
@@ -257,6 +267,11 @@
   footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
   footer a:hover{color:var(--brass);border-bottom-color:var(--brass)}
   footer .colophon{font-family:var(--f-display);font-style:italic;font-size:.95rem;margin-top:1rem}
+  /* CJK, as on the shelf: more leading, no faux italic, no wide tracking. */
+  body.cjk .lede{line-height:1.7}
+  body.cjk .remit,body.cjk .entry p{line-height:1.85}
+  body.cjk em,body.cjk footer .colophon{font-style:normal}
+  body.cjk h2,body.cjk .card-head .kind,body.cjk .entry p.meta{letter-spacing:.04em}
   @media (prefers-reduced-motion:reduce){.entry,.cta{transition:none}.entry:hover,.entry:focus-within{transform:none}}
 </style>
 <script type="application/ld+json">
@@ -267,10 +282,24 @@
 <div class="wrap">
 
   <header>
-    <p class="acc">Catalogue IX</p>
+    <div class="topline">
+      <p class="acc">Catalogue IX</p>
+      <div class="langsw" hidden>
+        <label class="visually-hidden" for="langSel" data-i18n="language">Language</label>
+        <select id="langSel">
+          <option value="en" lang="en">English</option>
+          <option value="nb" lang="nb">Norsk bokmål</option>
+          <option value="es" lang="es">Español</option>
+          <option value="fr" lang="fr">Français</option>
+          <option value="de" lang="de">Deutsch</option>
+          <option value="zh" lang="zh-Hans">简体中文</option>
+          <option value="ja" lang="ja">日本語</option>
+        </select>
+      </div>
+    </div>
     <h1>The Ninth Catalogue<span class="tm">™</span></h1>
     <div class="intro">
-      <div class="cabinet" role="img" aria-label="A card cabinet of nine drawers; the ninth stands open.">
+      <div class="cabinet" role="img" aria-label="A card cabinet of nine drawers; the ninth stands open." data-i18n-label="cabinet">
         <div class="drawers" aria-hidden="true">
           <span class="drawer"><b>I</b></span>
           <span class="drawer"><b>II</b></span>
@@ -284,39 +313,185 @@
         </div>
       </div>
       <div class="text">
-        <p class="lede">Instruments for studying traditional astrology, made by a student for fellow students.</p>
-        <p class="remit">The Ninth Catalogue publishes free software. Its present entries follow Benjamin Dykes’s <em>Traditional Natal Astrology Course</em>: the sky its lessons describe, the arithmetic of casting a chart by hand, and the medieval texts it teaches from. Later entries may concern obscure books, or small machines that fit in the hand. Nothing in it is for sale.</p>
+        <p class="lede" data-i18n="lede">Instruments for studying traditional astrology, made by a student for fellow students.</p>
+        <p class="remit" data-i18n-html="remit">The Ninth Catalogue publishes free software. Its present entries follow Benjamin Dykes’s <em>Traditional Natal Astrology Course</em>: the sky its lessons describe, the arithmetic of casting a chart by hand, and the medieval texts it teaches from. Later entries may concern obscure books, or small machines that fit in the hand. Nothing in it is for sale.</p>
       </div>
     </div>
   </header>
 
   <div class="rule"></div>
 
-  <h2>Open for consultation</h2>
+  <h2 data-i18n="open">Open for consultation</h2>
 
   <ul class="entries">
     <li class="entry">
-      <div class="card-head"><span class="no">IX · 1</span><span class="kind">The collection</span></div>
+      <div class="card-head"><span class="no">IX · 1</span><span class="kind" data-i18n="dah.kind">The collection</span></div>
       <h3>Dār al-Ḥikma <span class="ar" lang="ar" dir="rtl">دار الحكمة</span></h3>
-      <p>Browser tools, demonstrations and other small works: the celestial sphere, Ptolemy’s models, arithmetic in sixties, and the tables and calculator for casting a chart by hand. Each is a single page: open it, use it, save it if you like.</p>
-      <p class="meta">Free · Runs in the browser · Seven languages</p>
-      <a class="cta" href="https://dar-al-hikma.github.io/">Explore the collection</a>
+      <p data-i18n="dah.desc">Browser tools, demonstrations and other small works: the celestial sphere, Ptolemy’s models, arithmetic in sixties, and the tables and calculator for casting a chart by hand. Each is a single page: open it, use it, save it if you like.</p>
+      <p class="meta" data-i18n="dah.meta">Free · Runs in the browser · Seven languages</p>
+      <a class="cta" href="https://dar-al-hikma.github.io/" data-i18n="dah.cta">Explore the collection</a>
     </li>
     <li class="entry">
-      <div class="card-head"><span class="no">IX · 2</span><span class="kind">The application</span></div>
+      <div class="card-head"><span class="no">IX · 2</span><span class="kind" data-i18n="zij.kind">The application</span></div>
       <h3>Zīj <span class="ar" lang="ar" dir="rtl">زِيج</span></h3>
-      <p>A desktop study companion for traditional natal astrology: cast a chart, then check, table by table, what the texts say about it, chiefly Sahl b. Bishr and Abū Ma’shar in Benjamin Dykes’s translations. Every rule it applies names the passage it comes from.</p>
-      <p class="meta">Free download · Windows · macOS · Linux from source</p>
-      <a class="cta" href="zij/">Download Zīj</a>
+      <p data-i18n="zij.desc">A desktop study companion for traditional natal astrology: cast a chart, then check, table by table, what the texts say about it, chiefly Sahl b. Bishr and Abū Ma’shar in Benjamin Dykes’s translations. Every rule it applies names the passage it comes from.</p>
+      <p class="meta" data-i18n="zij.meta">Free download · Windows · macOS · Linux from source · In English</p>
+      <a class="cta" href="zij/" data-i18n="zij.cta">Download Zīj</a>
     </li>
   </ul>
 
   <footer>
-    <p>Correspondence: <a href="mailto:curator@theninthcatalogue.org">curator@theninthcatalogue.org</a></p>
-    <p>An independent student project, not a publication of the course or of Benjamin Dykes.</p>
-    <p class="colophon">Set in EB Garamond and IBM Plex. The first eight catalogues are unavailable for consultation.</p>
+    <p data-i18n-html="mail">Correspondence: <a href="mailto:curator@theninthcatalogue.org">curator@theninthcatalogue.org</a></p>
+    <p data-i18n="independent">An independent student project, not a publication of the course or of Benjamin Dykes.</p>
+    <p class="colophon" data-i18n="colophon">Set in EB Garamond and IBM Plex. The first eight catalogues are unavailable for consultation.</p>
   </footer>
 
 </div>
+<script>
+// The page in the reader's language: the one last chosen on any of the catalogue's pages (dah.lang), else the
+// browser's, else English. The English is the page itself; a key a language lacks stays English. Without this
+// script the page is whole, in English, and the menu stays hidden.
+(function(){
+  var I18N = {
+    nb: {
+      "language": "Språk",
+      "cabinet": "Et kartotekskap med ni skuffer; den niende står åpen.",
+      "lede": "Instrumenter for å studere tradisjonell astrologi, laget av en student for medstudenter.",
+      "remit": "The Ninth Catalogue gir ut gratis programvare. Oppføringene den har nå, følger Benjamin Dykes’ <em>Traditional Natal Astrology Course</em>: himmelen leksjonene beskriver, regningen når man setter opp et horoskop for hånd, og middelaldertekstene kurset underviser ut fra. Senere oppføringer kan handle om lite kjente bøker, eller om små maskiner som får plass i hånden. Ingenting i den er til salgs.",
+      "open": "Til gjennomsyn",
+      "dah.kind": "Samlingen",
+      "dah.desc": "Verktøy for nettleseren, demonstrasjoner og andre små verk: himmelkulen, Ptolemaios’ modeller, regning i sekstitallsystemet, og tabellene og kalkulatoren for å sette opp et horoskop for hånd. Hvert av dem er én enkelt side: åpne den, bruk den, lagre den om du vil.",
+      "dah.meta": "Gratis · Kjører i nettleseren · Sju språk",
+      "dah.cta": "Utforsk samlingen",
+      "zij.kind": "Programmet",
+      "zij.desc": "Et skrivebordsprogram til hjelp i studiet av tradisjonell fødselsastrologi: sett opp et horoskop, og se så, tabell for tabell, hva tekstene sier om det, først og fremst Sahl b. Bishr og Abū Ma’shar i Benjamin Dykes’ oversettelser. Hver regel det bruker, oppgir stedet i teksten den kommer fra.",
+      "zij.meta": "Gratis nedlasting · Windows · macOS · Linux fra kildekoden · På engelsk",
+      "zij.cta": "Last ned Zīj",
+      "mail": "Henvendelser: <a href=\"mailto:curator@theninthcatalogue.org\">curator@theninthcatalogue.org</a>",
+      "independent": "Et uavhengig studentprosjekt, ikke en utgivelse fra kurset eller fra Benjamin Dykes.",
+      "colophon": "Satt i EB Garamond og IBM Plex. De åtte første katalogene er ikke tilgjengelige for gjennomsyn."
+    },
+    es: {
+      "language": "Idioma",
+      "cabinet": "Un fichero de nueve cajones; el noveno está abierto.",
+      "lede": "Instrumentos para estudiar astrología tradicional, hechos de estudiante a estudiante.",
+      "remit": "The Ninth Catalogue publica software gratuito. Sus entradas actuales siguen el <em>Traditional Natal Astrology Course</em> de Benjamin Dykes: el cielo que describen sus lecciones, la aritmética de levantar una carta a mano y los textos medievales en los que se basa. Más adelante podrá haber entradas sobre libros poco conocidos, o sobre pequeñas máquinas que caben en la mano. Nada de lo que contiene está a la venta.",
+      "open": "Disponible para consulta",
+      "dah.kind": "La colección",
+      "dah.desc": "Herramientas para el navegador, demostraciones y otras piezas pequeñas: la esfera celeste, los modelos de Ptolomeo, la aritmética en base sesenta, y las tablas y la calculadora para levantar una carta a mano. Cada una es una sola página: ábrala, úsela y, si quiere, guárdela.",
+      "dah.meta": "Gratis · Funciona en el navegador · Siete idiomas",
+      "dah.cta": "Explore la colección",
+      "zij.kind": "La aplicación",
+      "zij.desc": "Una herramienta de escritorio para estudiar la astrología natal tradicional: levante una carta y compruebe después, tabla por tabla, qué dicen de ella los textos, sobre todo Sahl b. Bishr y Abū Ma’shar en las traducciones de Benjamin Dykes. Cada regla que aplica indica el pasaje del que procede.",
+      "zij.meta": "Descarga gratuita · Windows · macOS · Linux desde el código fuente · En inglés",
+      "zij.cta": "Descargue Zīj",
+      "mail": "Correspondencia: <a href=\"mailto:curator@theninthcatalogue.org\">curator@theninthcatalogue.org</a>",
+      "independent": "Un proyecto estudiantil independiente, que no es una publicación del curso ni de Benjamin Dykes.",
+      "colophon": "Compuesto en EB Garamond e IBM Plex. Los ocho primeros catálogos no están disponibles para consulta."
+    },
+    fr: {
+      "language": "Langue",
+      "cabinet": "Un meuble fichier à neuf tiroirs ; le neuvième est ouvert.",
+      "lede": "Des instruments pour étudier l’astrologie traditionnelle, faits d’élève à élève.",
+      "remit": "The Ninth Catalogue publie des logiciels gratuits. Ses entrées actuelles suivent le <em>Traditional Natal Astrology Course</em> de Benjamin Dykes : le ciel que décrivent ses leçons, l’arithmétique pour dresser un thème à la main, et les textes médiévaux sur lesquels repose son enseignement. Des entrées à venir pourront porter sur des livres méconnus, ou sur de petites machines qui tiennent dans la main. Rien de ce qu’il contient n’est à vendre.",
+      "open": "Ouvert à la consultation",
+      "dah.kind": "La collection",
+      "dah.desc": "Des outils pour le navigateur, des démonstrations et d’autres petits ouvrages : la sphère céleste, les modèles de Ptolémée, l’arithmétique sexagésimale, et les tables et la calculatrice pour dresser un thème à la main. Chacun tient en une seule page : ouvrez-le, utilisez-le, enregistrez-le si vous le souhaitez.",
+      "dah.meta": "Gratuit · Fonctionne dans le navigateur · Sept langues",
+      "dah.cta": "Explorer la collection",
+      "zij.kind": "L’application",
+      "zij.desc": "Une application de bureau pour étudier l’astrologie natale traditionnelle : dressez un thème, puis vérifiez, table par table, ce que les textes en disent, principalement Sahl b. Bishr et Abū Ma’shar dans les traductions de Benjamin Dykes. Chaque règle appliquée indique le passage dont elle provient.",
+      "zij.meta": "Téléchargement gratuit · Windows · macOS · Linux depuis les sources · En anglais",
+      "zij.cta": "Télécharger Zīj",
+      "mail": "Correspondance : <a href=\"mailto:curator@theninthcatalogue.org\">curator@theninthcatalogue.org</a>",
+      "independent": "Un projet étudiant indépendant, qui n’est une publication ni du cours ni de Benjamin Dykes.",
+      "colophon": "Composé en EB Garamond et IBM Plex. Les huit premiers catalogues ne sont pas consultables."
+    },
+    de: {
+      "language": "Sprache",
+      "cabinet": "Ein Karteischrank mit neun Schubladen; die neunte steht offen.",
+      "lede": "Instrumente zum Studium der traditionellen Astrologie, aus studentischer Hand für Mitstudierende.",
+      "remit": "The Ninth Catalogue veröffentlicht kostenlose Software. Seine derzeitigen Einträge folgen Benjamin Dykes’ <em>Traditional Natal Astrology Course</em>: der Himmel, den die Lektionen beschreiben, das Rechnen, wenn man ein Horoskop von Hand stellt, und die mittelalterlichen Texte, auf denen er aufbaut. Spätere Einträge könnten von entlegenen Büchern handeln oder von kleinen Maschinen, die in die Hand passen. Nichts darin steht zum Verkauf.",
+      "open": "Zur Einsicht",
+      "dah.kind": "Die Sammlung",
+      "dah.desc": "Werkzeuge für den Browser, Demonstrationen und andere kleine Stücke: die Himmelssphäre, Ptolemäus’ Modelle, das Rechnen in Sechzigern sowie die Tafeln und der Rechner, mit denen man ein Horoskop von Hand stellt. Jedes ist eine einzige Seite: öffnen, benutzen und, wenn Sie mögen, speichern.",
+      "dah.meta": "Kostenlos · Läuft im Browser · Sieben Sprachen",
+      "dah.cta": "Die Sammlung erkunden",
+      "zij.kind": "Die Anwendung",
+      "zij.desc": "Ein Studienbegleiter für die traditionelle Geburtsastrologie, als Desktop-Anwendung: Stellen Sie ein Horoskop und prüfen Sie dann, Tafel für Tafel, was die Texte darüber sagen, vor allem Sahl b. Bishr und Abū Ma’shar in Benjamin Dykes’ Übersetzungen. Jede angewandte Regel nennt die Stelle, aus der sie stammt.",
+      "zij.meta": "Kostenloser Download · Windows · macOS · Linux aus dem Quellcode · Auf Englisch",
+      "zij.cta": "Zīj herunterladen",
+      "mail": "Korrespondenz: <a href=\"mailto:curator@theninthcatalogue.org\">curator@theninthcatalogue.org</a>",
+      "independent": "Ein unabhängiges studentisches Projekt, keine Veröffentlichung des Kurses oder von Benjamin Dykes.",
+      "colophon": "Gesetzt in EB Garamond und IBM Plex. Die ersten acht Kataloge sind nicht zur Einsicht freigegeben."
+    },
+    zh: {
+      "language": "语言",
+      "cabinet": "一个有九个抽屉的卡片目录柜，第九个抽屉开着。",
+      "lede": "学习传统占星学的工具，由一名学员为同学们制作。",
+      "remit": "The Ninth Catalogue 出版免费软件。目前的条目以 Benjamin Dykes《<em>Traditional Natal Astrology Course</em>》为本：课中讲述的天空、手工起盘的算术，以及课程所依据的中世纪典籍。日后的条目或许会涉及冷门的书，或是可以握在手里的小机器。其中的一切都不出售。",
+      "open": "开放查阅",
+      "dah.kind": "作品集",
+      "dah.desc": "浏览器工具、演示和其他小作品：天球、托勒密的模型、六十进制算术，以及手工起盘用的数表和计算器。每一件都只是一个网页：打开就能用，喜欢的话就存下来。",
+      "dah.meta": "免费 · 在浏览器中运行 · 7 种语言",
+      "dah.cta": "浏览作品集",
+      "zij.kind": "应用程序",
+      "zij.desc": "一款学习传统本命占星学的桌面应用：先起盘，再逐表查看典籍对这张星盘怎么说，主要是 Benjamin Dykes 所译的 Sahl b. Bishr 与 Abū Ma’shar。它应用的每一条规则都注明出自哪一段原文。",
+      "zij.meta": "免费下载 · Windows · macOS · Linux 从源代码运行 · 英文界面",
+      "zij.cta": "下载 Zīj",
+      "mail": "通信：<a href=\"mailto:curator@theninthcatalogue.org\">curator@theninthcatalogue.org</a>",
+      "independent": "独立的学员项目，并非该课程或 Benjamin Dykes 的出版物。",
+      "colophon": "西文字体为 EB Garamond 与 IBM Plex。前八部目录不开放查阅。"
+    },
+    ja: {
+      "language": "言語",
+      "cabinet": "引き出しが九つあるカード目録の棚。九番目の引き出しが開いています。",
+      "lede": "伝統的な占星術を学ぶための道具です。ひとりの受講生が、仲間の受講生のために作りました。",
+      "remit": "The Ninth Catalogue は無料のソフトウェアを発行しています。いま収めているものは Benjamin Dykes の <em>Traditional Natal Astrology Course</em> に沿ったもので、その教本が描く空、チャートを手で立てるための計算、そして講座が拠りどころとする中世の文献を扱います。今後は、あまり知られていない本や、手のひらに収まる小さな機械を収めることもあるかもしれません。販売しているものはひとつもありません。",
+      "open": "閲覧可能",
+      "dah.kind": "コレクション",
+      "dah.desc": "ブラウザで使う道具、デモ、その他の小品です。天球、プトレマイオスのモデル、六十進の計算、そしてチャートを手で立てるための数表と計算機。どれも単一のページです。開いて、使って、よければ保存してください。",
+      "dah.meta": "無料 · ブラウザで動作 · 7 言語",
+      "dah.cta": "コレクションを見る",
+      "zij.kind": "アプリケーション",
+      "zij.desc": "伝統的な出生占星術を学ぶためのデスクトップアプリです。チャートを立て、文献がそれについて何と言っているかを表ごとに確かめます。おもに Benjamin Dykes 訳の Sahl b. Bishr と Abū Ma’shar です。適用する規則にはすべて、出典の箇所が示されます。",
+      "zij.meta": "無料ダウンロード · Windows · macOS · Linux はソースから · 英語版",
+      "zij.cta": "Zīj をダウンロード",
+      "mail": "連絡先：<a href=\"mailto:curator@theninthcatalogue.org\">curator@theninthcatalogue.org</a>",
+      "independent": "受講生による独立したプロジェクトであり、講座や Benjamin Dykes が発行したものではありません。",
+      "colophon": "欧文書体は EB Garamond と IBM Plex。第一から第八までの目録は閲覧できません。"
+    }
+  };
+  var TAGS = { en:'en', nb:'nb', es:'es', fr:'fr', de:'de', zh:'zh-Hans', ja:'ja' };
+  var els = document.querySelectorAll('[data-i18n],[data-i18n-html],[data-i18n-label]'), EN = {};
+  function key(e){ return e.getAttribute('data-i18n') || e.getAttribute('data-i18n-html') || e.getAttribute('data-i18n-label'); }
+  function get(e){ return e.hasAttribute('data-i18n-html') ? e.innerHTML : e.hasAttribute('data-i18n-label') ? e.getAttribute('aria-label') : e.textContent; }
+  function put(e, v){ if (e.hasAttribute('data-i18n-html')) e.innerHTML = v; else if (e.hasAttribute('data-i18n-label')) e.setAttribute('aria-label', v); else e.textContent = v; }
+  for (var i = 0; i < els.length; i++) EN[key(els[i])] = get(els[i]);
+  function pick(){
+    var saved = null;
+    try { saved = localStorage.getItem('dah.lang'); } catch (e) {}
+    if (saved && TAGS[saved]) return saved;
+    var list = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+    for (var i = 0; i < list.length; i++){ var t = String(list[i]).toLowerCase();
+      if (/^(nb|no|nn)\b/.test(t)) return 'nb';
+      var cs = ['es','fr','de','zh','ja','en'];
+      for (var j = 0; j < cs.length; j++) if (t.indexOf(cs[j]) === 0) return cs[j]; }
+    return 'en';
+  }
+  var sel = document.getElementById('langSel');
+  function apply(l, save){
+    var T = I18N[l] || {};
+    for (var i = 0; i < els.length; i++){ var k = key(els[i]); put(els[i], T[k] != null ? T[k] : EN[k]); }
+    document.documentElement.setAttribute('lang', TAGS[l]);
+    document.body.classList.toggle('cjk', l === 'zh' || l === 'ja');
+    sel.value = l;
+    if (save) try { localStorage.setItem('dah.lang', l); } catch (e) {}
+  }
+  sel.addEventListener('change', function(){ apply(TAGS[sel.value] ? sel.value : 'en', true); });
+  apply(pick(), false);
+  sel.parentNode.hidden = false;
+})();
+</script>
 </body>
 </html>
