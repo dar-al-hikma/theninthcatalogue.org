@@ -95,6 +95,8 @@
   .points li{position:relative;padding-left:1.35rem;color:var(--muted);font-size:1.02rem}
   .points li::before{content:"";position:absolute;left:.15rem;top:.68em;width:.42rem;height:.42rem;border:1px solid var(--brass);transform:rotate(45deg)}
   .points em{color:var(--vellum)}
+  .points a{color:var(--vellum);text-decoration:none;border-bottom:1px solid var(--line)}
+  .points a:hover{color:var(--brass);border-bottom-color:var(--brass)}
 
   .rule{
     height:1px;
@@ -187,7 +189,7 @@
   .copy:hover{color:var(--brass);border-color:var(--brass)}
   .copy[hidden]{display:none}
 
-  .checksums{color:var(--muted);font-size:.98rem;margin:1.6rem 0 0;max-width:58ch}
+  .checksums{color:var(--muted);font-size:.98rem;margin:0 0 1.5rem;max-width:58ch}
   .checksums a{color:var(--vellum);text-decoration:none;border-bottom:1px solid var(--line)}
   .checksums a:hover{color:var(--brass);border-bottom-color:var(--brass)}
   .more{font-family:var(--f-ui);font-size:.86rem;color:var(--muted-2);margin:1.8rem 0 0;line-height:1.9}
@@ -217,7 +219,7 @@
 <div class="wrap">
 
   <div class="topline">
-    <a class="crumb" href="../">The Ninth Catalogue™</a>
+    <a class="crumb" href="../">The Ninth Catalogue</a>
     <p class="acc">Cat. IX · 2</p>
   </div>
 
@@ -227,7 +229,8 @@
     <p class="byline">Free desktop software from <a href="../">The Ninth Catalogue™</a></p>
     <p class="lede">A <em>zīj</em> is a set of astronomical tables with the rules for using them. This one is a study companion for traditional natal astrology: cast a chart, then check, table by table, what the texts say about it.</p>
     <ul class="points">
-      <li>The rules come from Benjamin Dykes’s translations of Sahl b. Bishr and Abū Ma’shar, and every rule a page applies names the sentence it comes from.</li>
+      <li>The rules come chiefly from Benjamin Dykes’s translations of Sahl b. Bishr and Abū Ma’shar, and every rule a page applies names the passage it comes from.</li>
+      <li>Other translations (Holden’s Rhetorius and Morin, Riley’s Valens, more of Dykes’s) serve only as witnesses: to settle a reading those two leave open, to answer where they are silent, or to stand beside a value where the sources disagree, never to replace one. <a href="https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md">The references</a> give every text and its part.</li>
       <li>Where a text leaves something open, the page says so and shows the reading it made. Where the texts settle nothing, the result is reported <em>unresolved</em>, with its reason and the alternatives.</li>
       <li>It works offline: places come from a bundled atlas, and the planets from the built-in Moshier ephemeris.</li>
       <li>The judgment of the chart is the astrologer’s.</li>
@@ -240,6 +243,8 @@
     <h2 id="dl-h">Free download</h2>
     <p class="mobile-note">Zīj runs on a desktop or laptop computer, not on a phone or tablet.</p>
     <p class="note">Zīj is free to download and use. Each download is portable: unzip it and run it. There is no installer, and once it is on your computer it needs no internet. Your saved charts and preferences live in your own data folder and carry over from one version to the next. The links always fetch the current release.</p>
+
+    <p class="checksums">These builds are not signed, so Windows and macOS will warn you the first time you open one. To check a download first, compare its SHA-256 with its line in <a href="https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS">SHA256SUMS</a>, which each release publishes: <code>shasum -a 256 Zij-macos.zip</code> on macOS, or <code>Get-FileHash Zij-windows.zip</code> in PowerShell on Windows, which prints it in capitals. If they differ, download it again rather than opening it.</p>
 
     <div class="downloads">
       <div class="dl" id="windows" data-os="windows">
@@ -273,13 +278,11 @@ python run_source.py</code></pre>
       </div>
     </div>
 
-    <p class="checksums">Each release lists the SHA-256 of its zips in <a href="https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS">SHA256SUMS</a>. To check a download, compare its hash with its line there: <code>shasum -a 256 Zij-macos.zip</code> on macOS, or <code>Get-FileHash Zij-windows.zip</code> in PowerShell on Windows, which prints it in capitals.</p>
-
     <p class="more"><a href="https://github.com/dar-al-hikma/Zij/releases">Release notes and earlier versions</a> · <a href="https://github.com/dar-al-hikma/Zij/blob/main/docs/REFERENCES.md">The texts it cites</a> · <a href="https://github.com/dar-al-hikma/Zij">Source code</a>, under the AGPL-3.0</p>
   </section>
 
   <footer>
-    <p>Published by <a href="../">The Ninth Catalogue™</a> · <a href="mailto:curator@theninthcatalogue.org">curator@theninthcatalogue.org</a></p>
+    <p>Published by <a href="../">The Ninth Catalogue</a> · <a href="mailto:curator@theninthcatalogue.org">curator@theninthcatalogue.org</a></p>
     <p>Also in the catalogue: <a class="ui-name" href="https://dar-al-hikma.github.io/">Dār al-Ḥikma</a>, small tools for the browser.</p>
   </footer>
 
