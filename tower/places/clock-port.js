@@ -1,7 +1,7 @@
 /* Zīj clock resolution, ported from time_zones.py.
  * Copyright (C) 2026 Dār al-Ḥikma.
  * GNU Affero General Public License, version 3 (AGPL-3.0).
- * Origin: Zij-dev fc813ad8528c91591c5a0c2708c8ef6f2634db42.
+ * Origin: Zīj's time_zones.py.
  * See data/LICENSE-AGPL-3.0.txt and the exported manifest for the source and data pins.
  */
 (function (root) {

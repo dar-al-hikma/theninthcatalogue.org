@@ -1,2 +1,2 @@
-/* Generated from held Zīj inputs; lossless prefix transport; see manifest.json. */
+/* Generated from Zīj's place data; lossless prefix transport; see manifest.json. */
 (()=>{const r=["","Grad Skopje"],c=["MK"],z=["Europe/Skopje"],u=[],d=[["789963","Извор","Izvor",0,0,41.55472,21.69722,0,696,0,0,-1],["790034","Идризово","Idrizovo",1,0,41.96083,21.57556,0,2292,0,0,-1]];window.__TowerPlacesData("search-078",d.map(v=>({id:v[0],name:v[1],asciiName:v[2]===null?v[1]:v[2],region:r[v[3]],country:c[v[4]],lat:v[5],lon:v[6],zone:v[7]<0?null:z[v[7]],population:v[8],seat:!!v[9],derivedZone:v[10]<0?null:z[v[10]],zoneRule:v[11]<0?null:u[v[11]]})));})();
