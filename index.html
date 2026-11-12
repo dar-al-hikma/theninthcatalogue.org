@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Ninth Catalogue</title>
 <meta name="robots" content="noindex">
-<meta name="description" content="The Ninth Catalogue publishes free software for the study of traditional astronomy and astrology: Zīj, a desktop application, and Dār al-Ḥikma, a collection of tools that run in the browser.">
+<meta name="description" content="The Ninth Catalogue publishes free software for the study of traditional astronomy and astrology: Dār al-Ḥikma, a collection of tools that run in the browser; the Tower, the sky over any place at any moment; and Zīj, a desktop application.">
 <link rel="canonical" href="https://theninthcatalogue.org/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://theninthcatalogue.org/">
 <meta property="og:title" content="The Ninth Catalogue">
-<meta property="og:description" content="The Ninth Catalogue publishes free software for the study of traditional astronomy and astrology: Zīj, a desktop application, and Dār al-Ḥikma, a collection of tools that run in the browser.">
+<meta property="og:description" content="The Ninth Catalogue publishes free software for the study of traditional astronomy and astrology: Dār al-Ḥikma, a collection of tools that run in the browser; the Tower, the sky over any place at any moment; and Zīj, a desktop application.">
 <meta name="theme-color" content="#070A12">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23070A12'/%3E%3Crect x='11' y='15' width='42' height='34' rx='3' fill='none' stroke='%23E3AA3E' stroke-width='3.2'/%3E%3Cpath d='M11 24.5h42' stroke='%23E3AA3E' stroke-width='2.4'/%3E%3Cpath d='M18 31h22M18 36.5h14' stroke='%237FB6E0' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='43.5' r='2.4' fill='none' stroke='%23E3AA3E' stroke-width='2'/%3E%3C/svg%3E">
 <style>
@@ -198,6 +198,7 @@
     border-radius:50%;
     border:1px solid var(--line);
     background:var(--void);
+    pointer-events:none;
   }
   .entry:hover,.entry:focus-within{
     border-color:var(--line);
@@ -333,7 +334,14 @@
       <a class="cta" href="https://dar-al-hikma.github.io/" data-i18n="dah.cta">Explore the collection</a>
     </li>
     <li class="entry">
-      <div class="card-head"><span class="no">IX · 2</span><span class="kind" data-i18n="zij.kind">The application</span></div>
+      <div class="card-head"><span class="no">IX · 2</span><span class="kind" data-i18n="tower.kind">The instrument</span></div>
+      <h3 data-i18n="tower.name">The Tower</h3>
+      <p data-i18n="tower.desc">The sky over any place, at any moment from 501 BC to AD 2200. Find a town and the clock it kept, stand in the tower or look from outside, turn the heavens forward or back, and open any of 1,686 stars and clusters for its risings, its settings and the natures the old texts give it.</p>
+      <p class="meta" data-i18n="tower.meta">Astronomy · Runs in the browser · Seven languages</p>
+      <a class="cta" href="tower/" data-i18n="tower.cta">Open the Tower</a>
+    </li>
+    <li class="entry">
+      <div class="card-head"><span class="no">IX · 3</span><span class="kind" data-i18n="zij.kind">The application</span></div>
       <h3>Zīj <span class="ar" lang="ar" dir="rtl">زِيج</span></h3>
       <p data-i18n="zij.desc">A desktop study companion for traditional natal astrology: cast a chart, then check, table by table, what the texts say about it, chiefly Sahl b. Bishr and Abū Ma’shar in Benjamin Dykes’s translations. Every rule it applies names the passage it comes from.</p>
       <p class="meta" data-i18n="zij.meta">Free download · Windows · macOS · Linux from source · In English</p>
@@ -363,6 +371,11 @@
       "dah.desc": "Verktøy for nettleseren, demonstrasjoner og andre små verk: himmelkulen, Ptolemaios’ modeller, regning i sekstitallsystemet, og tabellene og kalkulatoren for å sette opp et horoskop for hånd. Hvert av dem er én enkelt side: åpne den, bruk den, lagre den om du vil.",
       "dah.meta": "Gratis · Kjører i nettleseren · Sju språk",
       "dah.cta": "Utforsk samlingen",
+      "tower.name": "Tårnet",
+      "tower.kind": "Instrumentet",
+      "tower.desc": "Himmelen over et hvilket som helst sted, når som helst fra 501 f.Kr. til 2200 e.Kr. Finn en by og den lokale klokketiden den brukte, stå i tårnet eller se himmelen utenfra, drei himmelen fremover eller bakover, og åpne en hvilken som helst av de 1 686 stjernene og stjernehopene for å se når den går opp og ned, og hvilke planetnaturer de gamle tekstene gir den.",
+      "tower.meta": "Astronomi · Kjører i nettleseren · Sju språk",
+      "tower.cta": "Åpne Tårnet",
       "zij.kind": "Programmet",
       "zij.desc": "Et skrivebordsprogram til hjelp i studiet av tradisjonell fødselsastrologi: sett opp et horoskop, og se så, tabell for tabell, hva tekstene sier om det, først og fremst Sahl b. Bishr og Abū Ma’shar i Benjamin Dykes’ oversettelser. Hver regel det bruker, oppgir stedet i teksten den kommer fra.",
       "zij.meta": "Gratis nedlasting · Windows · macOS · Linux fra kildekoden · På engelsk",
@@ -380,6 +393,11 @@
       "dah.desc": "Herramientas para el navegador, demostraciones y otras piezas pequeñas: la esfera celeste, los modelos de Ptolomeo, la aritmética en base sesenta, y las tablas y la calculadora para levantar una carta a mano. Cada una es una sola página: ábrala, úsela y, si quiere, guárdela.",
       "dah.meta": "Gratis · Funciona en el navegador · Siete idiomas",
       "dah.cta": "Explore la colección",
+      "tower.name": "La Torre",
+      "tower.kind": "El instrumento",
+      "tower.desc": "El cielo sobre cualquier lugar, en cualquier momento desde el 501 a. C. hasta el 2200 d. C. Busque una localidad y la hora local que se usaba allí, sitúese en la Torre o vea el cielo desde fuera, hágalo avanzar o retroceder y abra la ficha de cualquiera de los 1686 objetos —estrellas y cúmulos— para conocer sus salidas, sus puestas y las naturalezas planetarias que le atribuyen los textos antiguos.",
+      "tower.meta": "Astronomía · Funciona en el navegador · Siete idiomas",
+      "tower.cta": "Abra La Torre",
       "zij.kind": "La aplicación",
       "zij.desc": "Una herramienta de escritorio para estudiar la astrología natal tradicional: levante una carta y compruebe después, tabla por tabla, qué dicen de ella los textos, sobre todo Sahl b. Bishr y Abū Ma’shar en las traducciones de Benjamin Dykes. Cada regla que aplica indica el pasaje del que procede.",
       "zij.meta": "Descarga gratuita · Windows · macOS · Linux desde el código fuente · En inglés",
@@ -397,6 +415,11 @@
       "dah.desc": "Des outils pour le navigateur, des démonstrations et d’autres petits ouvrages : la sphère céleste, les modèles de Ptolémée, l’arithmétique sexagésimale, et les tables et la calculatrice pour dresser un thème à la main. Chacun tient en une seule page : ouvrez-le, utilisez-le, enregistrez-le si vous le souhaitez.",
       "dah.meta": "Gratuit · Fonctionne dans le navigateur · Sept langues",
       "dah.cta": "Explorer la collection",
+      "tower.name": "La Tour",
+      "tower.kind": "L’instrument",
+      "tower.desc": "Le ciel au-dessus de n’importe quel lieu, à tout moment de 501 av. J.-C. à 2200 apr. J.-C. Trouvez une ville et l’heure locale qu’elle suivait, placez-vous dans la Tour ou voyez le ciel de l’extérieur, faites défiler le ciel en avant ou en arrière, et ouvrez un objet parmi les 1 686 étoiles et amas proposés pour connaître ses levers, ses couchers et les natures planétaires que lui attribuent les textes anciens.",
+      "tower.meta": "Astronomie · Fonctionne dans le navigateur · Sept langues",
+      "tower.cta": "Ouvrir La Tour",
       "zij.kind": "L’application",
       "zij.desc": "Une application de bureau pour étudier l’astrologie natale traditionnelle : dressez un thème, puis vérifiez, table par table, ce que les textes en disent, principalement Sahl b. Bishr et Abū Ma’shar dans les traductions de Benjamin Dykes. Chaque règle appliquée indique le passage dont elle provient.",
       "zij.meta": "Téléchargement gratuit · Windows · macOS · Linux depuis les sources · En anglais",
@@ -414,6 +437,11 @@
       "dah.desc": "Werkzeuge für den Browser, Demonstrationen und andere kleine Stücke: die Himmelssphäre, Ptolemäus’ Modelle, das Rechnen in Sechzigern sowie die Tafeln und der Rechner, mit denen man ein Horoskop von Hand stellt. Jedes ist eine einzige Seite: öffnen, benutzen und, wenn Sie mögen, speichern.",
       "dah.meta": "Kostenlos · Läuft im Browser · Sieben Sprachen",
       "dah.cta": "Die Sammlung erkunden",
+      "tower.name": "Der Turm",
+      "tower.kind": "Das Instrument",
+      "tower.desc": "Der Himmel über jedem Ort, zu jedem Zeitpunkt von 501 v. Chr. bis 2200 n. Chr. Finden Sie eine Stadt und die örtliche Uhrzeit, die dort damals verwendet wurde. Stehen Sie im Turm oder betrachten Sie den Himmel von außen, lassen Sie ihn vorwärts oder rückwärts laufen und öffnen Sie einen beliebigen der 1.686 Sterne und Sternhaufen, um seine Aufgänge, seine Untergänge und die Planetennaturen zu sehen, die ihm die alten Texte zuschreiben.",
+      "tower.meta": "Astronomie · Läuft im Browser · Sieben Sprachen",
+      "tower.cta": "„Der Turm“ öffnen",
       "zij.kind": "Die Anwendung",
       "zij.desc": "Ein Studienbegleiter für die traditionelle Geburtsastrologie, als Desktop-Anwendung: Stellen Sie ein Horoskop und prüfen Sie dann, Tafel für Tafel, was die Texte darüber sagen, vor allem Sahl b. Bishr und Abū Ma’shar in Benjamin Dykes’ Übersetzungen. Jede angewandte Regel nennt die Stelle, aus der sie stammt.",
       "zij.meta": "Kostenloser Download · Windows · macOS · Linux aus dem Quellcode · Auf Englisch",
@@ -431,6 +459,11 @@
       "dah.desc": "浏览器工具、演示和其他小作品：天球、托勒密的模型、六十进制算术，以及手工起盘用的数表和计算器。每一件都只是一个网页：打开就能用，喜欢的话就存下来。",
       "dah.meta": "免费 · 在浏览器中运行 · 7 种语言",
       "dah.cta": "浏览作品集",
+      "tower.name": "塔",
+      "tower.kind": "仪器",
+      "tower.desc": "公元前 501 年至公元 2200 年间，任一时刻、任一地点上空的星空。查找城镇及其当时实际使用的当地钟表时间，站在塔中或从外部观看，让星空随时间向前或向后转动，再从共计 1,686 个恒星与星团中任选一个，打开其卡片，查看它升起与落下的时刻，以及古代典籍赋予它的行星性质。",
+      "tower.meta": "天文学 · 在浏览器中运行 · 7 种语言",
+      "tower.cta": "打开塔",
       "zij.kind": "应用程序",
       "zij.desc": "一款学习传统本命占星学的桌面应用：先起盘，再逐表查看典籍对这张星盘怎么说，主要是 Benjamin Dykes 所译的 Sahl b. Bishr 与 Abū Ma’shar。它应用的每一条规则都注明出自哪一段原文。",
       "zij.meta": "免费下载 · Windows · macOS · Linux 从源代码运行 · 英文界面",
@@ -448,6 +481,11 @@
       "dah.desc": "ブラウザで使う道具、デモ、その他の小品です。天球、プトレマイオスのモデル、六十進の計算、そしてチャートを手で立てるための数表と計算機。どれも単一のページです。開いて、使って、よければ保存してください。",
       "dah.meta": "無料 · ブラウザで動作 · 7 言語",
       "dah.cta": "コレクションを見る",
+      "tower.name": "塔",
+      "tower.kind": "観測器具",
+      "tower.desc": "紀元前 501 年から西暦 2200 年まで、どの瞬間でも、どの場所からでも空を眺められます。町を探し、そこで当時用いられていた現地時刻を確かめ、塔に立ったり外側から見たりして、天の動きを先へ進めたり戻したりできます。合わせて 1,686 の恒星と星団から好きなもののカードを開くと、昇る時刻、沈む時刻、古い文献がその天体に与えている惑星の性質を確かめられます。",
+      "tower.meta": "天文学 · ブラウザで動作 · 7 言語",
+      "tower.cta": "塔を開く",
       "zij.kind": "アプリケーション",
       "zij.desc": "伝統的な出生占星術を学ぶためのデスクトップアプリです。チャートを立て、文献がそれについて何と言っているかを表ごとに確かめます。おもに Benjamin Dykes 訳の Sahl b. Bishr と Abū Ma’shar です。適用する規則にはすべて、出典の箇所が示されます。",
       "zij.meta": "無料ダウンロード · Windows · macOS · Linux はソースから · 英語版",
