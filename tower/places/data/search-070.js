@@ -1,0 +1,2 @@
+/* Generated from held Zīj inputs; lossless prefix transport; see manifest.json. */
+(()=>{const r=["Il-Ħamrun"],c=["MT"],z=["Europe/Malta"],u=[],d=[["2562998","Ħamrun","Hamrun",0,0,35.88452,14.48498,0,9743,1,0,-1]];window.__TowerPlacesData("search-070",d.map(v=>({id:v[0],name:v[1],asciiName:v[2]===null?v[1]:v[2],region:r[v[3]],country:c[v[4]],lat:v[5],lon:v[6],zone:v[7]<0?null:z[v[7]],population:v[8],seat:!!v[9],derivedZone:v[10]<0?null:z[v[10]],zoneRule:v[11]<0?null:u[v[11]]})));})();
