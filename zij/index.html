@@ -278,14 +278,14 @@
     <div class="downloads">
       <div class="dl" id="windows" data-os="windows">
         <div class="dl-head"><h3>Windows</h3><span class="req" data-i18n="win.req">Windows 10 or 11, 64-bit</span></div>
-        <a class="btn" data-i18n-html="win.btn" href="https://github.com/dar-al-hikma/Zij/releases/latest/download/Zij-windows.zip">Download for Windows<span class="size">zip · about 430 MB</span></a>
+        <a class="btn" data-i18n-html="win.btn" href="https://github.com/dar-al-hikma/Zij/releases/latest/download/Zij-windows.zip">Download for Windows<span class="size">zip · about 1.1 GB</span></a>
         <p data-i18n-html="win.unzip">Right-click the zip and choose <b>Extract All</b>, then open <b>Zij</b> in the folder it makes. It will not run from inside the zip.</p>
         <p data-i18n-html="win.warn">The first time, Windows may say it has protected your PC from an unrecognised app. Choose <b>More info</b>, then <b>Run anyway</b>.</p>
       </div>
 
       <div class="dl" id="macos" data-os="macos">
         <div class="dl-head"><h3>macOS</h3><span class="req" data-i18n="mac.req">Apple silicon: M1 or later</span></div>
-        <a class="btn" data-i18n-html="mac.btn" href="https://github.com/dar-al-hikma/Zij/releases/latest/download/Zij-macos.zip">Download for macOS<span class="size">zip · about 175 MB</span></a>
+        <a class="btn" data-i18n-html="mac.btn" href="https://github.com/dar-al-hikma/Zij/releases/latest/download/Zij-macos.zip">Download for macOS<span class="size">zip · about 870 MB</span></a>
         <p data-i18n-html="mac.open">Open the zip if your browser has not already, move <b>Zij</b> to Applications if you like, and open it.</p>
         <p data-i18n-html="mac.warn">The first time, macOS will say it cannot verify the developer. On macOS 15 or later, open <b>System Settings › Privacy &amp; Security</b>, scroll down and choose <b>Open Anyway</b>. On earlier versions, Control-click <b>Zij</b> and choose <b>Open</b>.</p>
         <p class="aside" data-i18n="mac.intel">There is no build for Macs with Intel processors. They can run Zīj from its source, as on Linux.</p>
@@ -300,6 +300,7 @@ cd Zij
 python3.14 -m venv .venv
 . .venv/bin/activate
 pip install -r requirements.txt
+python tools/fetch_atlas.py --repo dar-al-hikma/Zij
 python run_source.py</code></pre>
           <button class="copy" type="button" data-for="linux-cmd" data-i18n="copy" hidden>Copy</button>
         </div>
@@ -339,11 +340,11 @@ python run_source.py</code></pre>
       "note": "Zīj er gratis å laste ned og bruke. Hver nedlasting er portabel: pakk den ut og kjør den. Det finnes ikke noe installasjonsprogram, og når den først ligger på datamaskinen, trenger den ikke internett. Lagrede horoskoper og innstillinger ligger i din egen datamappe og følger med fra én versjon til den neste. Lenkene henter alltid gjeldende versjon. Selve programmet Zīj er på engelsk.",
       "checksums": "Nedlastingene er ikke signert, så Windows og macOS vil advare deg første gang du åpner en av dem. Vil du kontrollere en nedlasting først, kan du sammenligne SHA-256-verdien med linjen for den i <a href=\"https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS\">SHA256SUMS</a>, som hver utgivelse publiserer: <code>shasum -a 256 Zij-macos.zip</code> på macOS, eller <code>Get-FileHash Zij-windows.zip</code> i PowerShell på Windows, som skriver den med store bokstaver. Er de ulike, last den ned på nytt i stedet for å åpne den.",
       "win.req": "Windows 10 eller 11, 64-bit",
-      "win.btn": "Last ned for Windows<span class=\"size\">zip · omtrent 430 MB</span>",
+      "win.btn": "Last ned for Windows<span class=\"size\">zip · omtrent 1,1 GB</span>",
       "win.unzip": "Høyreklikk zip-filen og velg <b>Pakk ut alle</b>, og åpne så <b>Zij</b> i mappen som lages. Programmet kan ikke kjøres fra innsiden av zip-filen.",
       "win.warn": "Første gang kan Windows si at den har beskyttet PC-en mot en ukjent app. Velg <b>Mer informasjon</b> og deretter <b>Kjør likevel</b>.",
       "mac.req": "Apple-chip: M1 eller nyere",
-      "mac.btn": "Last ned for macOS<span class=\"size\">zip · omtrent 175 MB</span>",
+      "mac.btn": "Last ned for macOS<span class=\"size\">zip · omtrent 870 MB</span>",
       "mac.open": "Åpne zip-filen hvis nettleseren ikke allerede har gjort det, flytt <b>Zij</b> til Apper-mappen om du vil, og åpne det.",
       "mac.warn": "Første gang sier macOS at utvikleren ikke kan verifiseres. På macOS 15 eller nyere åpner du <b>Systeminnstillinger › Personvern og sikkerhet</b>, ruller ned og velger <b>Åpne likevel</b>. På eldre versjoner holder du nede Kontroll-tasten mens du klikker på <b>Zij</b>, og velger <b>Åpne</b>.",
       "mac.intel": "Det finnes ingen versjon for Mac-maskiner med Intel-prosessor. De kan kjøre Zīj fra kildekoden, som på Linux.",
@@ -371,11 +372,11 @@ python run_source.py</code></pre>
       "note": "Descargar y usar Zīj es gratis. Cada descarga es portátil: descomprímala y ejecútela. No hay instalador, y una vez en su ordenador no necesita internet. Sus cartas guardadas y sus preferencias están en su propia carpeta de datos y se conservan de una versión a la siguiente. Los enlaces descargan siempre la versión actual. La propia aplicación Zīj está en inglés.",
       "checksums": "Estas compilaciones no están firmadas, así que Windows y macOS le avisarán la primera vez que abra una. Para comprobar antes una descarga, compare su SHA-256 con su línea en <a href=\"https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS\">SHA256SUMS</a>, que publica cada versión: <code>shasum -a 256 Zij-macos.zip</code> en macOS, o <code>Get-FileHash Zij-windows.zip</code> en la PowerShell de Windows, que lo muestra en mayúsculas. Si no coinciden, vuelva a descargarla en lugar de abrirla.",
       "win.req": "Windows 10 u 11, 64 bits",
-      "win.btn": "Descargar para Windows<span class=\"size\">zip · unos 430 MB</span>",
+      "win.btn": "Descargar para Windows<span class=\"size\">zip · unos 1,1 GB</span>",
       "win.unzip": "Haga clic con el botón derecho en el zip, elija <b>Extraer todo</b> y abra <b>Zij</b> en la carpeta que se crea. No funciona desde dentro del zip.",
       "win.warn": "La primera vez, puede que Windows diga que ha protegido su PC de una aplicación no reconocida. Elija <b>Más información</b> y después <b>Ejecutar de todas formas</b>.",
       "mac.req": "Chip de Apple: M1 o posterior",
-      "mac.btn": "Descargar para macOS<span class=\"size\">zip · unos 175 MB</span>",
+      "mac.btn": "Descargar para macOS<span class=\"size\">zip · unos 870 MB</span>",
       "mac.open": "Abra el zip si el navegador no lo ha hecho ya, mueva <b>Zij</b> a la carpeta Aplicaciones si quiere y ábralo.",
       "mac.warn": "La primera vez, macOS indicará que no se puede verificar el desarrollador. En macOS 15 o posterior, abra <b>Ajustes del Sistema › Privacidad y seguridad</b>, desplácese hacia abajo y elija <b>Abrir igualmente</b>. En versiones anteriores, con la tecla Control pulsada, haga clic en <b>Zij</b> y elija <b>Abrir</b>.",
       "mac.intel": "No hay versión para Mac con procesador Intel. En ellos, Zīj puede ejecutarse desde su código fuente, como en Linux.",
@@ -403,11 +404,11 @@ python run_source.py</code></pre>
       "note": "Zīj est gratuit, à télécharger comme à utiliser. Chaque téléchargement est portable : décompressez-le et lancez-le. Il n’y a pas de programme d’installation, et une fois sur votre ordinateur, il n’a plus besoin d’internet. Vos thèmes enregistrés et vos préférences sont rangés dans votre propre dossier de données et passent d’une version à la suivante. Les liens téléchargent toujours la version actuelle. Le logiciel Zīj lui-même est en anglais.",
       "checksums": "Ces versions ne sont pas signées : Windows et macOS vous avertiront la première fois que vous en ouvrirez une. Pour vérifier d’abord un téléchargement, comparez son SHA-256 avec sa ligne dans <a href=\"https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS\">SHA256SUMS</a>, que publie chaque version : <code>shasum -a 256 Zij-macos.zip</code> sur macOS, ou <code>Get-FileHash Zij-windows.zip</code> dans PowerShell sous Windows, qui l’affiche en majuscules. Si les deux diffèrent, téléchargez à nouveau le fichier au lieu de l’ouvrir.",
       "win.req": "Windows 10 ou 11, 64 bits",
-      "win.btn": "Télécharger pour Windows<span class=\"size\">zip · environ 430 Mo</span>",
+      "win.btn": "Télécharger pour Windows<span class=\"size\">zip · environ 1,1 Go</span>",
       "win.unzip": "Faites un clic droit sur le zip et choisissez <b>Extraire tout</b>, puis ouvrez <b>Zij</b> dans le dossier créé. Il ne se lance pas depuis l’intérieur du zip.",
       "win.warn": "La première fois, Windows peut indiquer qu’il a protégé votre ordinateur d’une application non reconnue. Choisissez <b>Informations complémentaires</b>, puis <b>Exécuter quand même</b>.",
       "mac.req": "Puce Apple : M1 ou ultérieure",
-      "mac.btn": "Télécharger pour macOS<span class=\"size\">zip · environ 175 Mo</span>",
+      "mac.btn": "Télécharger pour macOS<span class=\"size\">zip · environ 870 Mo</span>",
       "mac.open": "Ouvrez le zip si votre navigateur ne l’a pas déjà fait, déplacez <b>Zij</b> dans le dossier Applications si vous le souhaitez, et ouvrez-le.",
       "mac.warn": "La première fois, macOS indiquera que le développeur ne peut pas être vérifié. Sous macOS 15 ou version ultérieure, ouvrez <b>Réglages Système › Confidentialité et sécurité</b>, faites défiler vers le bas et choisissez <b>Ouvrir quand même</b>. Sur les versions antérieures, cliquez sur <b>Zij</b> en maintenant la touche Contrôle enfoncée et choisissez <b>Ouvrir</b>.",
       "mac.intel": "Il n’existe pas de version pour les Mac à processeur Intel. Ils peuvent exécuter Zīj depuis ses sources, comme sous Linux.",
@@ -435,11 +436,11 @@ python run_source.py</code></pre>
       "note": "Zīj ist kostenlos, zum Herunterladen wie zum Benutzen. Jeder Download ist portabel: entpacken und starten. Es gibt kein Installationsprogramm, und ist Zīj einmal auf Ihrem Computer, braucht es kein Internet. Ihre gespeicherten Horoskope und Einstellungen liegen in Ihrem eigenen Datenordner und bleiben von einer Version zur nächsten erhalten. Die Links laden immer die aktuelle Version. Zīj selbst ist auf Englisch.",
       "checksums": "Diese Downloads sind nicht signiert, deshalb warnen Windows und macOS, wenn Sie einen davon zum ersten Mal öffnen. Um einen Download vorher zu prüfen, vergleichen Sie seinen SHA-256-Wert mit seiner Zeile in <a href=\"https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS\">SHA256SUMS</a>, die jede Version veröffentlicht: <code>shasum -a 256 Zij-macos.zip</code> unter macOS oder <code>Get-FileHash Zij-windows.zip</code> in der PowerShell unter Windows, die ihn in Großbuchstaben ausgibt. Weichen die beiden ab, laden Sie die Datei erneut herunter, statt sie zu öffnen.",
       "win.req": "Windows 10 oder 11, 64-Bit",
-      "win.btn": "Für Windows herunterladen<span class=\"size\">zip · etwa 430 MB</span>",
+      "win.btn": "Für Windows herunterladen<span class=\"size\">zip · etwa 1,1 GB</span>",
       "win.unzip": "Klicken Sie mit der rechten Maustaste auf die ZIP-Datei, wählen Sie <b>Alle extrahieren</b> und öffnen Sie dann <b>Zij</b> in dem neuen Ordner. Direkt aus der ZIP-Datei heraus startet es nicht.",
       "win.warn": "Beim ersten Mal meldet Windows womöglich, dass es Ihren Computer vor einer unbekannten App geschützt hat. Wählen Sie <b>Weitere Informationen</b> und dann <b>Trotzdem ausführen</b>.",
       "mac.req": "Apple Chip: M1 oder neuer",
-      "mac.btn": "Für macOS herunterladen<span class=\"size\">zip · etwa 175 MB</span>",
+      "mac.btn": "Für macOS herunterladen<span class=\"size\">zip · etwa 870 MB</span>",
       "mac.open": "Öffnen Sie die ZIP-Datei, falls Ihr Browser das nicht schon getan hat, verschieben Sie <b>Zij</b> nach Wunsch in den Ordner „Programme“ und öffnen Sie es.",
       "mac.warn": "Beim ersten Mal meldet macOS, dass der Entwickler nicht bestätigt werden kann. Öffnen Sie unter macOS 15 oder neuer <b>Systemeinstellungen › Datenschutz &amp; Sicherheit</b>, scrollen Sie nach unten und wählen Sie <b>Dennoch öffnen</b>. Klicken Sie bei älteren Versionen bei gedrückter Taste „ctrl“ auf <b>Zij</b> und wählen Sie <b>Öffnen</b>.",
       "mac.intel": "Für Macs mit Intel-Prozessor gibt es keinen Build. Auf ihnen läuft Zīj aus dem Quellcode, wie unter Linux.",
@@ -467,11 +468,11 @@ python run_source.py</code></pre>
       "note": "Zīj 可免费下载和使用。每个下载都是便携版：解压后即可运行。无需安装程序，装到电脑上之后也不需要联网。保存的星盘和偏好设置存放在你自己的数据文件夹中，升级版本时会保留下来。链接总是获取当前版本。Zīj 软件本身为英文界面。",
       "checksums": "这些构建版本没有签名，所以第一次打开时，Windows 和 macOS 会发出警告。如果想先校验下载的文件，可以把它的 SHA-256 与每个版本都会发布的 <a href=\"https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS\">SHA256SUMS</a> 中对应的那一行比较：在 macOS 上用 <code>shasum -a 256 Zij-macos.zip</code>，在 Windows 上用 PowerShell 运行 <code>Get-FileHash Zij-windows.zip</code>（它以大写字母显示）。如果两者不同，请重新下载，不要打开。",
       "win.req": "Windows 10 或 11，64 位",
-      "win.btn": "下载 Windows 版<span class=\"size\">zip · 约 430 MB</span>",
+      "win.btn": "下载 Windows 版<span class=\"size\">zip · 约 1.1 GB</span>",
       "win.unzip": "右键单击 zip 文件，选择“<b>全部解压缩</b>”，然后打开解压出的文件夹中的“<b>Zij</b>”。直接在 zip 文件里无法运行。",
       "win.warn": "第一次运行时，Windows 可能会提示它已阻止一个无法识别的应用，以保护你的电脑。请选择“<b>更多信息</b>”，然后选择“<b>仍要运行</b>”。",
       "mac.req": "Apple 芯片：M1 或更新",
-      "mac.btn": "下载 macOS 版<span class=\"size\">zip · 约 175 MB</span>",
+      "mac.btn": "下载 macOS 版<span class=\"size\">zip · 约 870 MB</span>",
       "mac.open": "如果浏览器还没有自动解压，请打开 zip 文件；愿意的话把“<b>Zij</b>”移到“应用程序”文件夹，然后打开它。",
       "mac.warn": "第一次打开时，macOS 会提示无法验证开发者。在 macOS 15 或更新版本上，打开“<b>系统设置 › 隐私与安全性</b>”，向下滚动并点按“<b>仍要打开</b>”。在更早的版本上，按住 Control 键点按“<b>Zij</b>”，然后选择“<b>打开</b>”。",
       "mac.intel": "没有适用于 Intel 处理器 Mac 的版本。这类 Mac 可以像 Linux 一样从源代码运行 Zīj。",
@@ -499,11 +500,11 @@ python run_source.py</code></pre>
       "note": "Zīj は無料でダウンロードして使えます。どのダウンロードもポータブル版で、展開すればそのまま実行できます。インストーラーはなく、いったんコンピューターに入れればインターネット接続は不要です。保存したチャートや設定はご自身のデータフォルダーに保存され、バージョンを上げても引き継がれます。リンクからは常に最新のリリースを取得します。Zīj 本体は英語版です。",
       "checksums": "これらのビルドには署名がないため、初めて開くときに Windows や macOS が警告を表示します。先にダウンロードを確かめるには、その SHA-256 を、各リリースが公開している <a href=\"https://github.com/dar-al-hikma/Zij/releases/latest/download/SHA256SUMS\">SHA256SUMS</a> の該当行と照合してください。macOS では <code>shasum -a 256 Zij-macos.zip</code>、Windows では PowerShell で <code>Get-FileHash Zij-windows.zip</code> を実行します（後者は大文字で表示します）。一致しない場合は、開かずにもう一度ダウンロードしてください。",
       "win.req": "Windows 10 または 11、64 ビット",
-      "win.btn": "Windows 版をダウンロード<span class=\"size\">zip · 約 430 MB</span>",
+      "win.btn": "Windows 版をダウンロード<span class=\"size\">zip · 約 1.1 GB</span>",
       "win.unzip": "zip ファイルを右クリックして「<b>すべて展開</b>」を選び、できたフォルダーの中の「<b>Zij</b>」を開きます。zip の中からは実行できません。",
       "win.warn": "初回は、認識されないアプリから PC を保護したと Windows が表示することがあります。「<b>詳細情報</b>」を選び、続いて「<b>実行</b>」を選びます。",
       "mac.req": "Apple シリコン：M1 以降",
-      "mac.btn": "macOS 版をダウンロード<span class=\"size\">zip · 約 175 MB</span>",
+      "mac.btn": "macOS 版をダウンロード<span class=\"size\">zip · 約 870 MB</span>",
       "mac.open": "ブラウザがまだ展開していなければ zip を開き、必要なら「<b>Zij</b>」を「アプリケーション」フォルダに移動して、開きます。",
       "mac.warn": "初回は、開発元を検証できないと macOS が表示します。macOS 15 以降では「<b>システム設定 › プライバシーとセキュリティ</b>」を開き、下にスクロールして「<b>このまま開く</b>」を選びます。それより前のバージョンでは、Controlキーを押しながら「<b>Zij</b>」をクリックし、「<b>開く</b>」を選びます。",
       "mac.intel": "Intel プロセッサ搭載の Mac 向けのビルドはありません。Linux と同じく、ソースから Zīj を実行できます。",
