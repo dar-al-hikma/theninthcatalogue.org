@@ -4480,7 +4480,9 @@ else{root.FIGURES=FIGURES;root.FIGURE_EXTRAS=FIGURE_EXTRAS;}
    m2-v333/HOST-FINDINGS.md. Optional sourceLabelRank(id, record) orders source labels within a priority;
    it returns a non-negative integer, or every source ranks 0 when absent. Figure names follow all sources
    of the same priority. Optional sourceZoomHint(id, record) marks crowded sources for a clickable
-   zoom marker. No page element, catalogue or astronomy global is read here. */
+   zoom marker. Optional sourceCategories(id) returns the category keys (strings) of the entries that name
+   the source; the source list's search then also matches their m4.category.* labels. No page element,
+   catalogue or astronomy global is read here. */
 var TowerView = (function(){
   "use strict";   // as the page's own script is, where this module ran before the hand-over
   // copied from the page (C08's copied helpers, owner B4): the same constants and one-line helpers, byte for byte
@@ -5017,14 +5019,25 @@ var TowerView = (function(){
       });
       replaceUI("angles",body); uiStats.anglesMs = performance.now() - start; return ok();
     }
+    function categoryText(id, labels){
+      var keys = host.sourceCategories(id), out = "";
+      if(!Array.isArray(keys)) throw new TypeError("TowerView: sourceCategories must return an array");
+      keys.forEach(function(k){
+        if(typeof k !== "string") throw new TypeError("TowerView: invalid source category");
+        if(!Object.prototype.hasOwnProperty.call(labels, k)) labels[k] = utext("m4.category." + k);
+        out += " " + labels[k];
+      });
+      return out;
+    }
     function refreshSources(){
       if(!ui) throw new TypeError("TowerView: mountUI must precede refreshSources");
       var start = performance.now(), search = ui.sources.querySelector("input"), list = ui.sources.querySelector("select"), q = search.value.trim().toLocaleLowerCase();
       var focused = document.activeElement === list, fragment = document.createDocumentFragment();
+      var labels = q && typeof host.sourceCategories === "function" ? {} : null;
       stars.concat(objects).forEach(function(r){
         if(!displayAllows(r.id)) return;
         var name = twName(r.id);
-        if((name + " " + r.id).toLocaleLowerCase().indexOf(q) < 0) return;
+        if((name + " " + r.id + (labels ? categoryText(r.id, labels) : "")).toLocaleLowerCase().indexOf(q) < 0) return;
         var option = node("option",name); option.value = r.id; fragment.appendChild(option);
       });
       list.disabled = !display.available;
@@ -7943,6 +7956,10 @@ const read={display:'curated',alternatives:false};
 const physical=CatalogueReader.physical(STARCAT,3);
 if(physical.status!=='ok') throw new Error('Catalogue unavailable: '+physical.status);
 const table=physical.table, significant=CatalogueReader.significant(STARCAT,3), curated=CatalogueReader.curated(STARCAT,3), first=new Set(curated.first||[]);
+const displaySets={curated:new Set(curated.ids||[]),significant:new Set(significant.ids||[])}, categoriesOf=new Map();
+for(const e of STARCAT.entries)for(const m of e.members){const c=categoriesOf.get(m[0])||[];if(!c.includes(e.cat))c.push(e.cat);categoriesOf.set(m[0],c);}
+function sourceCategories(id){return (categoriesOf.get(id)||[]).slice();}
+function panelRows(){return read.display==='full'?TW.rows:TW.rows.filter(r=>displaySets[read.display].has(r.id));}
 const view=$('view'), canvas=$('sky'), scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(38,1,.05,100);
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
 renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
@@ -8019,7 +8036,7 @@ function validateCivil(raw){
  if(Math.abs(f.lat)>90)return {status:'invalidPlace',field:'latitude'};if(Math.abs(f.lon)>180)return {status:'invalidPlace',field:'longitude'};return {status:'ok',form:f,jd:j.jdUT1};
 }
 function applyCivil(raw){closeCard(true);const v=validateCivil(raw);if(v.status!=='ok')return v;if(clockPending)return {status:'clockPending',messageKey:'s.clockPending'};return applyChart(v.form,v.jd,/\.\d+/.test(String(raw.time))?String(raw.time).trim():null);}
-const host={S,TW,PREF,TW_SHARED:{ground:1,horizon:1,ecliptic:1,meridian:1,cardinals:1},TW_PRIO:{select:0,target:1,guide:2,other:3},C,cam,camera,scene,renderer,view,equGroup,eclGroup,reduced:()=>matchMedia('(prefers-reduced-motion: reduce)').matches,T,label,fmtZod,eclV,equLocal,twActiveEcl:activeEcl,twName:name,twCopy:copy,twFinite:finite,kick,applyVisibility,syncToggles,twSyncUI:syncUI,setReveal:on=>{$('twLegend').hidden=!on;},sourcePriority:()=>3,sourceLabelRank:id=>first.has(id)?0:1,sourceZoomHint:id=>first.has(id),uiText:T,uiFormat,starDisplay,sourceEntries:entries,entryView,sourceDetails:details,alternativeIdentifications:()=>read.alternatives,figureName,figureAnchor,civilFields,validateCivil,applyCivil,onCivilInput:()=>{},onEntrySelect:()=>{}};
+const host={S,TW,PREF,TW_SHARED:{ground:1,horizon:1,ecliptic:1,meridian:1,cardinals:1},TW_PRIO:{select:0,target:1,guide:2,other:3},C,cam,camera,scene,renderer,view,equGroup,eclGroup,reduced:()=>matchMedia('(prefers-reduced-motion: reduce)').matches,T,label,fmtZod,eclV,equLocal,twActiveEcl:activeEcl,twName:name,twCopy:copy,twFinite:finite,kick,applyVisibility,syncToggles,twSyncUI:syncUI,setReveal:on=>{$('twLegend').hidden=!on;},sourcePriority:()=>3,sourceLabelRank:id=>first.has(id)?0:1,sourceZoomHint:id=>first.has(id),uiText:T,uiFormat,starDisplay,sourceEntries:entries,sourceCategories,entryView,sourceDetails:details,alternativeIdentifications:()=>read.alternatives,figureName,figureAnchor,civilFields,validateCivil,applyCivil,onCivilInput:()=>{},onEntrySelect:()=>{}};
 Tower=TowerView.create(host);
 function placeAt(jd,context=null){
  const ctx=context&&context.jdUT1===jd?context:Astro.context(jd);if(ctx.status!=='ok')return ctx;const st=[],ob=[];
@@ -8050,9 +8067,9 @@ function clockTo(t){if(t<=clockT)return;const dt=(t-clockT)/1000;clockT=t;if(dir
 function refreshStop(context=null){if(!TW.applied)return;if(TW.placeJD!==TW.jd)placeAt(TW.jd,context);coRefresh();updateDay();followForm();if(ready){Tower.setCivilFields(civilFields(),false);Tower.renderCard();}queuePanel();kick();}
 function turn(sign){clockTo(performance.now());clearRangeAnnouncement();const next=direction===sign?0:sign;if(direction&&next!==direction){direction=0;refreshStop();}direction=next;closeCard(true);if(!direction)refreshStop();syncTurn();queuePanel();kick();}
 function syncTurn(){for(const [id,sign]of [['turnBack',-1],['turnForward',1]]){$(id).setAttribute('aria-pressed',String(direction===sign));$(id).textContent=T(direction===sign?'s.pause':sign<0?'s.turnBack':'s.turnForward');}}
-function byLongitude(){const a=Astro.axes(S.lst,S.lat,S.obl),out={status:a.status};for(const k of ['asc','mc','dsc','ic'])out[k]={byLongitude:a[k]==null?null:TW.rows.filter(r=>r.lon!=null&&Math.abs(((r.lon-a[k]+540)%360)-180)<=1).map(r=>({id:r.id,dlon:((r.lon-a[k]+540)%360)-180})),crossing:null,crossingStatus:'unavailable',refused:[]};return out;}
+function byLongitude(){const a=Astro.axes(S.lst,S.lat,S.obl),out={status:a.status};for(const k of ['asc','mc','dsc','ic'])out[k]={byLongitude:a[k]==null?null:panelRows().filter(r=>r.lon!=null&&Math.abs(((r.lon-a[k]+540)%360)-180)<=1).map(r=>({id:r.id,dlon:((r.lon-a[k]+540)%360)-180})),crossing:null,crossingStatus:'unavailable',refused:[]};return out;}
 function queuePanel(){panelDue=true;kick();}
-function renderPanel(){if(!ready||!anglesOn)return;panelCalls++;const result=direction?byLongitude():Astro.onAngles(TW.rows.map(r=>TW.src[r.id]),TW.jd,{lat:S.lat,lonEast:TW.form.lon});Tower.renderAngles(result,{linked:true});lastPanel=performance.now();}
+function renderPanel(){if(!ready||!anglesOn)return;panelCalls++;const result=direction?byLongitude():Astro.onAngles(panelRows().map(r=>TW.src[r.id]),TW.jd,{lat:S.lat,lonEast:TW.form.lon});Tower.renderAngles(result,{linked:true});lastPanel=performance.now();}
 function worldFrame(){
  const f=S.lat*D,t=S.lst*D,M=new THREE.Vector3(0,Math.cos(f),Math.sin(f)),P=new THREE.Vector3(0,Math.sin(f),-Math.cos(f)),A=M.clone().multiplyScalar(Math.cos(t)).add(new THREE.Vector3(-Math.sin(t),0,0)),B=M.clone().multiplyScalar(Math.sin(t)).add(new THREE.Vector3(Math.cos(t),0,0));equGroup.matrix.makeBasis(A,B,P);equGroup.matrixWorldNeedsUpdate=true;eclGroup.rotation.x=S.obl*D;
  Tower.update({lat:S.lat,lst:S.lst,obl:S.obl,axes:Astro.axes(S.lst,S.lat,S.obl),linked:true,contextId:TW.ctx.contextId});
@@ -8134,7 +8151,7 @@ document.addEventListener('pointerup',e=>{if(cancelledListPointers.delete(e.poin
 document.addEventListener('pointercancel',e=>{if(cancelledListPointers.delete(e.pointerId)){listPointer={id:e.pointerId,active:false,blocked:true,choice:null};closeCard(false);return;}const p=listPointer;if(!p||p.id!==e.pointerId)return;p.active=false;if(p.option||p.blocked||nativeList.scrollTop!==p.expectedScroll)blockListGesture();else flushListChoice();},true);
 document.addEventListener('keydown',()=>{resetListGesture();listArrowChoice=false;},true);
 Tower.onSelect(id=>{clearRangeAnnouncement();coRefresh();if(ready){Tower.renderCard();Tower.refreshSources();if(id!=null){listChoiceSerial++;selectedCard(document.activeElement);}else closeCard(true);rememberListScroll(true);}kick();});
-function setDisplay(mode){closeCard(true);read.display=['curated','significant','full'].includes(mode)?mode:'curated';Tower.refreshStarDisplay();$('twDisplay').value=read.display;$('curatedBtn').setAttribute('aria-pressed',String(read.display==='curated'));kick();}
+function setDisplay(mode){closeCard(true);read.display=['curated','significant','full'].includes(mode)?mode:'curated';Tower.refreshStarDisplay();$('twDisplay').value=read.display;$('curatedBtn').setAttribute('aria-pressed',String(read.display==='curated'));queuePanel();kick();}
 function resize(){
  const expanded=!!fullscreenMode;if(resize.expanded!==undefined&&resize.expanded!==expanded)closeCard(true);resize.expanded=expanded;
  const ratio=Math.min(window.devicePixelRatio||1,2);if(renderer.getPixelRatio()!==ratio)renderer.setPixelRatio(ratio);if(!view.clientWidth||!view.clientHeight)return;
